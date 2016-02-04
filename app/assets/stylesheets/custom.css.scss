@@ -206,44 +206,16 @@ footer{
 	background-color: white;
 }
 
-/* carousel */
-.carousel-caption{
-	font-size: 24pt;
-	background-color: black;
-	opacity: .8;
-	margin-left: 150px;
-	margin-right: 150px;
+.checkbox {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  span {
+    margin-left: 20px;
+    font-weight: normal;
+  }
 }
 
-.glyphicon{
-	color: $light-black
-}
-
-.carousel-control{
-	background-color: white;
-	
-	border-color: #dbdbdb;
-	opacity: 1;
-	width: 5%;
-	&:hover{
-		opacity: 1;
-		background-color: #e8e8e8;
-		border: 2px solid;
-		border-color: #f0f0f0;
-	}
-	&:focus{
-		opacity: 1;
-	}
-}
-
-.carousel-control.left{
-	background-image: none;
-}
-
-.carousel-control.right{
-	background-image: none;
-}
-
-.carousel-control:hover, .carousel-control:focus{
-	opacity: 1;
+#session_remember_me {
+  width: auto;
+  margin-left: 0;
 }
