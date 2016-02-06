@@ -1,0 +1,9 @@
+<% provide(:title, @show.title) %>
+
+<div class="container-fluid">
+	<h1><%= @show.title %></h1>
+</div>
+
+<div class="container-fluid">
+	<%= link_to "Delete show", show_path, method: "delete" %>
+</div>

@@ -1,1 +1,13 @@
-<%= @user.name %>
+<% provide(:title, @user.name) %>
+
+<div class="container-fluid">
+	<div class="row">
+		<%= @user.name %>
+	</div>
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+		<%= link_to "New Show", new_show_path %>
+	</div>
+</div>
