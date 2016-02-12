@@ -13,11 +13,12 @@ class UsersController < ApplicationController
 				if @user.admin == true
 					message = "Admin profile create"
 				end
+				flash[:success] = message
+				redirect_to user_path(@user)
 			else
 				render 'new'
 			end
-			flash[:success] = message
-			redirect_to user_path(@user)
+				
 		else
 			if @user.save
 				message = "Welcome " + @user.name

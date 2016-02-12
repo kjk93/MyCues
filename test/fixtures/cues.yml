@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: 9.99
+  time: 9.99
+  follow: 1
+  follow_time: 9.99
+  auto_follow: false
+  purpose: MyString
+  called: MyString
+  page: 1
+  show_id: 
+
+two:
+  number: 9.99
+  time: 9.99
+  follow: 1
+  follow_time: 9.99
+  auto_follow: false
+  purpose: MyString
+  called: MyString
+  page: 1
+  show_id: 

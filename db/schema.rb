@@ -11,7 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160206162736) do
+ActiveRecord::Schema.define(version: 20160211212123) do
+
+  create_table "cues", force: :cascade do |t|
+    t.decimal  "number"
+    t.decimal  "time"
+    t.integer  "follow"
+    t.decimal  "follow_time"
+    t.boolean  "auto_follow"
+    t.string   "purpose"
+    t.string   "called"
+    t.integer  "page"
+    t.integer  "show_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "cues", ["show_id"], name: "index_cues_on_show_id"
 
   create_table "shows", force: :cascade do |t|
     t.string   "title"

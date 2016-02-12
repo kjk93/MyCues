@@ -7,3 +7,13 @@
 <div class="container-fluid">
 	<%= link_to "Delete show", show_path, method: "delete" %>
 </div>
+
+<div class="container-fluid">
+	<%= link_to "Add Cue", new_cue_path(show_id: @show.id) %>
+</div>
+
+<% if @show.cues.any? %>
+	<div class="container-fluid">
+		<%= render 'show_cues' %>
+	</div>
+<% end %>
