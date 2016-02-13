@@ -7,4 +7,8 @@ module ApplicationHelper
 			page_title + " | " + base_title
 		end
 	end
+
+	def object_title(name = nil)
+		session[:obj] = name
+	end
 end
