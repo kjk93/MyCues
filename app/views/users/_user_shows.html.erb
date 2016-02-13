@@ -1,0 +1,5 @@
+<ol>
+	<% @shows.each do |show| %>
+		<%= link_to show.title, show_path(show.id) %>
+	<% end %>
+</ol>

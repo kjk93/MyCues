@@ -11,3 +11,11 @@
 		<%= link_to "New Show", new_show_path %>
 	</div>
 </div>
+
+<% if @user.shows.any? %>
+	<div class="container-fluid">
+		<div class="row">
+			<%= render 'user_shows' %>
+		</div>
+	</div>
+<% end %>
