@@ -4,8 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
 
-  before_action :clear_object_name
-
   def logged_in_user
   	unless logged_in?
   		flash[:danger] = "Please Log In"
@@ -13,7 +11,7 @@ class ApplicationController < ActionController::Base
   	end
   end
 
-  def clear_object_name
+  def clear_object_title
     session.delete(:obj)
   end
 end

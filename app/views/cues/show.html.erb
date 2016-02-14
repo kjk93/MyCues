@@ -1,3 +1,6 @@
+<% provide(:title, @cue.show.title) %>
+<% object_title("cue") %>
+
 <%= @cue.purpose %>
 <br/>
-<%= link_to @show.title, show_path(@show.id) %>
+<%= link_to @cue.show.title, show_path(@cue.show) %>

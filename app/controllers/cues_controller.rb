@@ -21,7 +21,6 @@ class CuesController < ApplicationController
 
 	def show
 		@cue = Cue.find(params[:id])
-		@show = @cue.show
 	end
 
 	private
