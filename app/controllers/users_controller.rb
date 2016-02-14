@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
 	before_action :logged_in_user, only: [:show]
-	before_action :clear_object_title
 
 	def new
 		@user = User.new
