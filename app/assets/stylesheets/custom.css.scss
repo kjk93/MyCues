@@ -14,6 +14,8 @@ $light-black: #474540;
 $light-gray: #eaeaea;
 $light-red: #ff6557;
 $logo-red: #e33424;
+$second-blue: #2daee0;
+$box-shadow: #a3a3a3;
 
 /* universal */
 .center{
@@ -67,6 +69,26 @@ body{
 }
 
 /*Navbar Links */
+#navbar-center{
+	margin-left: 27%;
+	a{
+		color: $second-blue;
+		font-size: 40px;
+		text-align: center;
+		box-shadow: 0px 0px 10px 2px #a3a3a3;
+		border-radius: 15px;
+		padding-right: 15px;
+		padding-left: 15px;
+		padding-top: 3px;
+		padding-bottom: 3px;
+		&:hover{
+			text-decoration: none;
+			color: $light-red;
+			box-shadow: 0px 0px 15px 2px #000000;
+		}
+	}
+}
+
 
 .navbar-default .navbar-nav > li > a{
 	color: $light-red;
