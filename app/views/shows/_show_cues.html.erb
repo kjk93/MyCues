@@ -1,7 +1,8 @@
 <ol>
 	<div class="row">
 		<% @cues.each do |q| %>
-			<%= link_to "Cue #{q.number}", cue_path(q.id) %>
+			<%= link_to "Cue #{q.number}", cue_path(q) %>
+			<%= link_to "Edit", edit_cue_path(q) %>
 		<% end %>
 	</div>
 </ol>

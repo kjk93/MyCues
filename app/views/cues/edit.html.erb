@@ -1,0 +1,8 @@
+<% provide(:title, "#{@cue.number} - #{@show.title}") %>
+<% object_title("cue") %>
+
+<div class="container-fluid">
+	<h1><%= @cue.number %></h1>
+</div>
+
+<%= render 'cue_form' %>
