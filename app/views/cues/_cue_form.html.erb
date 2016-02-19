@@ -5,13 +5,13 @@
 			<%= render 'shared/error_messages', object: f.object %>
 			<div class="form-group col-xs-1">
 				<%= f.label :number %>
-				<%= f.text_field :number, class: "form-control" %>
+				<%= f.text_field :number, class: "form-control", id: "number-input" %>
 			</div>
-			<div class="form-group col-xs-1">
+			<div class="form-group col-xs-1" id="time-div">
 				<%= f.label :time %>
-				<%= f.number_field :time, class: "form-control" %>
+				<%= f.text_field :time, class: "form-control", id: "time-input" %>
 			</div>
-			<div class="form-group col-xs-2" style="margin-left: -50px; margin-right: -50px">
+			<div class="form-group col-xs-2" id="radio-div">
 				<%= f.label :follow, "Follow Type", id: "radio-cue" %>
 				<%= f.label :follow, class: "radio follow"  do %>
 					<% if @cue.follow.nil? %>
@@ -27,11 +27,11 @@
 					<%= f.radio_button :follow, 2%>Hang
 				<% end %>
 			</div>
-			<div class="form-group col-xs-2">
+			<div class="form-group col-xs-2" id="follow-hang-div">
 				<%= f.label :follow_time, "Follow/Hang Time" %>
-				<%= f.number_field :follow_time, class: "form-control" %>
+				<%= f.text_field :follow_time, class: "form-control", id: "follow-hang-input" %>
 			</div>
-			<div class="form-group col-xs-2">
+			<div class="form-group col-xs-3" id="purpose-div">
 				<%= f.label :purpose %>
 				<%= f.text_field :purpose, class: "form-control" %>
 			</div>
@@ -48,7 +48,7 @@
 			<div>
 				<%= hidden_field_tag :show_id, @show.id %>
 			</div>
-			<div class="form-group col-xs-1">
+			<div class="form-group col-xs-1" id="submit-div">
 				<%= f.submit "Save Cue", class: "btn btn-primary btn-large" %>
 			</div>
 			<% end %>
