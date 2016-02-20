@@ -35,6 +35,9 @@ class CuesController < ApplicationController
 
 
 	def destroy
+		cue = Cue.find(params[:id]).destroy
+		flash[:success] = "Cue #{cue.number} deleted"
+		redirect_to cue.show
 	end
 
 	def show
