@@ -23,9 +23,9 @@ class CuesController < ApplicationController
 
 	def update
 		@show = Show.find(params[:show_id])
-		cue = Cue.find(params[:id])
-		if cue.update_attributes(cue_params)
-			flash[:success] = "Cue #{cue.number} Updated"
+		@cue = Cue.find(params[:id])
+		if @cue.update_attributes(cue_params)
+			flash[:success] = "Cue #{@cue.number} Updated"
 			redirect_to @show
 		else
 			flash[:danger] = "Could not update cue"
@@ -35,9 +35,9 @@ class CuesController < ApplicationController
 
 
 	def destroy
-		cue = Cue.find(params[:id]).destroy
-		flash[:success] = "Cue #{cue.number} deleted"
-		redirect_to cue.show
+		@cue = Cue.find(params[:id]).destroy
+		flash[:success] = "Cue #{@cue.number} deleted"
+		redirect_to @cue.show
 	end
 
 	def show

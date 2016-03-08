@@ -1,5 +1,5 @@
 <div class="container-fluid">
-	<div class="row col-xs-10 col-xs-offset-1">
+	<div class="row col-xs-9 col-xs-offset-1">
 		<span>
 			<div class="table-responsive">
 				<table class="table table-striped table-hover">
@@ -12,7 +12,6 @@
 							<th>Purpose</th>
 							<th>Called</th>
 							<th>Page #</th>
-							<th>Delete</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -24,13 +23,13 @@
 									<% else %>
 									<% end %>
 								</td>
-								<td><%= q.number %></td>
-								<td><%= q.time %></td>
+								<td><%= decimal_format(q.number) %></td>
+								<td><%= decimal_format(q.time) %></td>
 								<td>
 								<% if q.follow == 1 %>
-									F - <%= q.follow_time %>
+									F - <%= decimal_format(q.follow_time) %>
 								<% elsif q.follow == 2 %>
-									H - <%= q.follow_time %>
+									H - <%= decimal_format(q.follow_time) %>
 								<% elsif q.follow == 0 %>
 								<% else %>
 									Error
@@ -39,16 +38,29 @@
 								<td><%= q.purpose %></td>
 								<td><%= q.called %></td>
 								<td><%= q.page %></td>
-								<td>
-									<%= link_to cue_path(q), method: :delete do%>
-										<span class="glyphicon glyphicon-remove"></span>
-									<% end %>
-								</td>
 							</tr>
 						<% end %>
 					</tbody>
 				</table>
 			</div>
 		</span>
+	</div>
+	<div class="col-xs-1" id="delete-cue-div">
+		<div class="table-responsive">
+			<table class="table">
+				<thead><th>Delete</th></thead>
+				<tbody>
+					<% @cues.each do |q| %>
+						<tr id="delete-cue">
+							<td>
+								<%= link_to cue_path(q.id), method: :delete, data: {confirm: "Delete Cue #{q.number}?"} do %>
+									<span class="glyphicon glyphicon-remove" id="delete-cue-button"></span>
+								<% end %>
+							</td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </div>

@@ -344,6 +344,7 @@ footer{
 	width: 5%;
 	padding-top: 1.3%;
 	padding-bottom: 1.3%;
+	outline: none;
 }
 
 #delete-show{
@@ -355,3 +356,12 @@ footer{
 	color: #ff6666;
 	padding-left: 15px;
 }
+
+#delete-cue-div{
+	margin-left: -30px;
+}
+
+#delete-cue-button{
+	outline: none;
+}
+
