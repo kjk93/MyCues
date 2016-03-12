@@ -1,5 +1,7 @@
 <% parent_back = capture do %>
 	<% case session[:obj] %>
+	<% when "user" %>
+		<h1><%= @user.name %></h1>
 	<% when "show" %>
 		<%= link_to @show.user.name, user_path(@show.user), class: "navbar-link" %>
 	<% when "cue" %>

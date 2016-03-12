@@ -29,6 +29,14 @@ $box-shadow: #c4c4c4;
 	}
 }
 
+.center-page{
+	margin-left: 480px;
+}
+
+.page-content{
+	padding-top: 25px;
+}
+
 h1, h2{
 	text-align: center;
 }
@@ -336,6 +344,14 @@ footer{
 #cue-form{
 	margin-left: 6%;
 	margin-right: -6%;
+}
+
+/* User Home */
+
+#new-show-btn{
+	padding-top: 25px;
+	padding-bottom: 25px;
+	font-size: 35px;
 }
 
 /*Show cuelist*/

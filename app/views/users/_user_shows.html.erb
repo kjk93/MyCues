@@ -1,5 +1,5 @@
 <ol>
 	<% @shows.each do |show| %>
-		<%= link_to show.title, show_path(show.id) %>
+		<%= link_to show.title, show_path(show.id), class: "btn btn-primary" %>
 	<% end %>
 </ol>
