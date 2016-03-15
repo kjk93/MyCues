@@ -1,5 +1,18 @@
-<ol>
-	<% @shows.each do |show| %>
-		<%= link_to show.title, show_path(show.id), class: "btn btn-primary" %>
-	<% end %>
-</ol>
+<% pic = false %>
+<% @shows.each do |show| %>
+	<% pic = false %>
+	<div class="col-xs-3">
+		<div class="thumbnail show-thumbnail">
+			<%= link_to show.title, edit_show_path(show.id), class: "alt-show-pic" %>
+			<!-- Add code for optional picture -->
+			<div class="caption">
+				<% if pic == true %>
+				<% end %>
+				<p>
+					<%= link_to "Show", show_path(show.id), class: "btn btn-default col-xs-3" %>
+					<%= link_to "Delete", show_path(show.id), method: :delete, data: {confirm: "Delete Show #{show.title}"}, class: "btn btn-danger col-xs-offset-6" %>
+				</p>
+			</div>
+		</div>
+	</div>
+<% end %>

@@ -11,20 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160220220730) do
+ActiveRecord::Schema.define(version: 20160222014207) do
 
   create_table "cues", force: :cascade do |t|
-    t.decimal  "number",      precision: 2
-    t.decimal  "time"
+    t.decimal  "number",      precision: 7, scale: 2
+    t.decimal  "time",        precision: 7, scale: 2
     t.integer  "follow"
-    t.decimal  "follow_time"
+    t.decimal  "follow_time", precision: 7, scale: 2
     t.boolean  "auto_follow"
     t.string   "purpose"
     t.string   "called"
     t.integer  "page"
     t.integer  "show_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   add_index "cues", ["number"], name: "index_cues_on_number"

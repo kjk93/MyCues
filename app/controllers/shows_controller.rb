@@ -7,7 +7,7 @@ class ShowsController < ApplicationController
 		@show = current_user.shows.build(show_params)
 		if @show.save
 			flash[:success] = "#{@show.title} Created"
-			redirect_to @show
+			redirect_to edit_show_path(@show)
 		else
 			flash[:danger] = "Show could not be created"
 			render 'new'
@@ -15,6 +15,11 @@ class ShowsController < ApplicationController
 	end
 
 	def show
+		@show = Show.find(params[:id])
+		@cues = @show.cues
+	end
+
+	def edit
 		@show = Show.find(params[:id])
 		@cues = @show.cues
 	end

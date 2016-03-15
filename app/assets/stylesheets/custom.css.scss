@@ -29,8 +29,8 @@ $box-shadow: #c4c4c4;
 	}
 }
 
-.center-page{
-	margin-left: 480px;
+.center-page-2{
+	margin-left: 550px;
 }
 
 .page-content{
@@ -99,6 +99,10 @@ body{
 			padding-bottom: 1.5px;*/
 		}
 	}
+}
+
+#nav-link{
+	margin-top: -10px;
 }
 
 
@@ -346,12 +350,23 @@ footer{
 	margin-right: -6%;
 }
 
-/* User Home */
+/*User Home*/
+#add-show-btn{
+	font-size: 25px;
+}
 
-#new-show-btn{
-	padding-top: 25px;
-	padding-bottom: 25px;
-	font-size: 35px;
+.show-thumbnail{
+	text-align: center;
+	margin-top: 50px;
+}
+
+.alt-show-pic{
+	color: $second-blue;
+	font-size: 25px;
+	&:hover{
+		text-decoration: none;
+		color: $logo-red;
+	}
 }
 
 /*Show cuelist*/
