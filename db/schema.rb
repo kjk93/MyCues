@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160315015918) do
+ActiveRecord::Schema.define(version: 20160317003307) do
 
   create_table "cues", force: :cascade do |t|
     t.decimal  "number",      precision: 7, scale: 2
@@ -40,15 +40,17 @@ ActiveRecord::Schema.define(version: 20160315015918) do
   add_index "shows", ["user_id", "created_at"], name: "index_shows_on_user_id_and_created_at"
   add_index "shows", ["user_id"], name: "index_shows_on_user_id"
 
+# Could not dump table "user_settings" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
+
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
     t.string   "password_digest"
-    t.boolean  "admin",            default: false
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.boolean  "admin",           default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "remember_digest"
-    t.decimal  "default_cue_time", default: 3.0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

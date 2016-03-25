@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
   resources :shows
   resources :cues
+  post 'settings/update'
+  get 'settings/edit'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

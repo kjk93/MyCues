@@ -13,17 +13,26 @@ class UsersController < ApplicationController
 				if @user.admin == true
 					message = "Admin profile create"
 				end
-				flash[:success] = message
-				redirect_to user_path(@user)
+				@settings = @user.settings.build()
+				if @settings.save
+					flash[:success] = message
+					redirect_to user_path(@user)
+				else
+					message = "Could not create settings"
+				end
 			else
 				render 'new'
 			end
-				
 		else
 			if @user.save
 				message = "Welcome " + @user.name
-				flash[:success] = message
-				redirect_to user_path(@user)
+				@settings = @user.settings.build(cue_time: 3)
+				if @settings.save
+					flash[:success] = message
+					redirect_to user_path(@user)
+				else
+					message = "Could not create settings"
+				end
 			else
 				render 'new'
 			end
