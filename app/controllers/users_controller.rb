@@ -19,7 +19,9 @@ class UsersController < ApplicationController
 					redirect_to user_path(@user)
 				else
 					message = "Could not create settings"
+					flash[:danger] = message
 				end
+				
 			else
 				render 'new'
 			end
@@ -32,6 +34,7 @@ class UsersController < ApplicationController
 					redirect_to user_path(@user)
 				else
 					message = "Could not create settings"
+					flash[:danger] = message
 				end
 			else
 				render 'new'

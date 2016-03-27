@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'show_settings/edit'
+
+  get 'show_settings/update'
+
+  get 'show_settings/destroy'
+
   root 'home_page#home'
 
   resources :users
@@ -7,9 +13,17 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
   resources :shows
   resources :cues
-  post 'settings/update'
-  get 'settings/edit'
+  #resources :user_settings, only:[:edit, :update, :destroy]
 
+  get 'usettings/:id/edit' => 'user_settings#edit', as: 'edit_user_setting'
+  patch 'usettings/:id' => 'user_settings#update', as: 'user_setting'
+  put 'usettings/:id' => 'user_settings#update'
+  delete 'usettings/:id' => 'user_settings#destroy'
+
+  get 'ssettings/:id/edit' => 'show_settings#edit', as: 'edit_show_setting'
+  patch 'ssettings/:id' => 'show_settings#update', as: 'show_setting'
+  put 'ssettings/:id' => 'show_settings#update'
+  delete 'ssetting/:id' => 'user_settings#destroy'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

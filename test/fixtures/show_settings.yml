@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cue_time: 9.99
+  cue_number_gap: 9.99
+  start_cue: 1
+
+two:
+  cue_time: 9.99
+  cue_number_gap: 9.99
+  start_cue: 1

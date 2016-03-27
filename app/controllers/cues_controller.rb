@@ -9,7 +9,7 @@ class CuesController < ApplicationController
 		cue = @show.cues.build(cue_params)
 		if cue.save
 			flash[:success] = "Cue Added"
-			redirect_to @show
+			redirect_to edit_show_path(@show)
 		else
 			flash[:danger] = "Cue could not be created"
 			render 'new'
@@ -26,7 +26,7 @@ class CuesController < ApplicationController
 		@cue = Cue.find(params[:id])
 		if @cue.update_attributes(cue_params)
 			flash[:success] = "Cue #{@cue.number} Updated"
-			redirect_to @show
+			redirect_to edit_show_path(@show)
 		else
 			flash[:danger] = "Could not update cue"
 			render 'edit'

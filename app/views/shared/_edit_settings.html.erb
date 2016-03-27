@@ -1,0 +1,28 @@
+<div class="row">
+	<div class="col-xs-3 settings">
+		<%= form_for(@setting, html:{class: "form-horizontal"}) do |f| %>
+			<%= render "shared/error_messages", object: f.object %>
+			<div class="form-group">
+				<%= f.label :cue_time, "Default time of cues" %>
+				<%= f.text_field :cue_time, value: "#{decimal_format(@setting.cue_time)}", class: "form-control" %>
+			</div>
+			<div class="form-group">
+				<%= f.label :cue_number_gap, "Default space between cue numbers" %>
+				<%= f.text_field :cue_number_gap, value: "#{decimal_format(@setting.cue_number_gap)}", class: "form-control" %>
+			</div>
+			<div class="form-group">
+				<%= f.label :start_cue, "Default cue to start on" %>
+				<%= f.text_field :start_cue, class: "form-control" %>
+			</div>
+			<div class=form-group>
+				<%= f.submit "Update Settings", class: "btn btn-primary btn-success" %>
+				<% case session[:obj] %>
+				<% when "user_setting" %>
+					<%= link_to "Cancel", user_path(@user), class: "btn btn-primary btn-danger col-xs-offset-3" %>
+				<% when "show_setting" %>
+					<%= link_to "Cancel", edit_show_path(@show), class: "btn btn-primary btn-danger col-xs-offset-3" %>
+				<% end %>
+			</div>
+		<% end %>
+	</div>
+</div>

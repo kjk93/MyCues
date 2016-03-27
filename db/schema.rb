@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160317003307) do
+ActiveRecord::Schema.define(version: 20160327121131) do
 
   create_table "cues", force: :cascade do |t|
     t.decimal  "number",      precision: 7, scale: 2
@@ -30,6 +30,17 @@ ActiveRecord::Schema.define(version: 20160317003307) do
   add_index "cues", ["number"], name: "index_cues_on_number"
   add_index "cues", ["show_id"], name: "index_cues_on_show_id"
 
+  create_table "show_settings", force: :cascade do |t|
+    t.decimal  "cue_time",       default: 3.0
+    t.decimal  "cue_number_gap", default: 2.0
+    t.integer  "start_cue",      default: 1
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "show_id"
+  end
+
+  add_index "show_settings", ["show_id"], name: "index_show_settings_on_show_id"
+
   create_table "shows", force: :cascade do |t|
     t.string   "title"
     t.datetime "created_at", null: false
@@ -46,6 +57,7 @@ ActiveRecord::Schema.define(version: 20160317003307) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.integer  "user_id"
+    t.integer  "start_cue",      default: 1
   end
 
   add_index "user_settings", ["user_id"], name: "index_user_settings_on_user_id"
@@ -54,11 +66,10 @@ ActiveRecord::Schema.define(version: 20160317003307) do
     t.string   "name"
     t.string   "email"
     t.string   "password_digest"
-    t.boolean  "admin",            default: false
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.boolean  "admin",           default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "remember_digest"
-    t.decimal  "default_cue_time", default: 3.0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
