@@ -47,6 +47,13 @@ class UsersController < ApplicationController
 		@shows = @user.shows
 	end
 
+	def destroy
+		@user = User.find(params[:id])
+		@user.destroy
+		flash[:success] = "#{@user.name} permanately delete"
+		redirect_to root_path
+	end
+
 	private
 		def user_params
 			params.require(:user).permit(:name, :email, :password, :password_confirmation)

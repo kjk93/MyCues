@@ -9,7 +9,7 @@
 	<% when "show" %>
 		<%= link_to @show.user.name, user_path(@show.user), class: "navbar-link" %>
 	<% when "cue" %>
-		<%= link_to @cue.show.title, show_path(@cue.show), class: "navbar-link" %>
+		<%= link_to @show.title, edit_show_path(@show), class: "navbar-link" %>
 	<% end %>
 <% end %>
 <nav class="navbar navbar-default navbar-fixed-top">

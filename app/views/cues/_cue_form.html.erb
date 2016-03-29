@@ -1,6 +1,9 @@
+<!-- fix layout -->
+
 <div class="container-fluid" id="cue-form">
 	<div class="row">
 		<div class="col-xs-12">
+			<% first = true if !@show.cues.any? %>
 			<%= form_for @cue do |f| %>
 			<%= render 'shared/error_messages', object: f.object %>
 			<div class="form-group col-xs-2" id="check-div">
@@ -11,11 +14,21 @@
 			</div>
 			<div class="form-group col-xs-1">
 				<%= f.label :number %>
-				<%= f.text_field :number, class: "form-control", id: "number-input" %>
+				<% if first %>
+					<%= f.text_field :number, value: decimal_format(@defaults.start_cue), class: "form-control", id: "number-input" %>
+				<% elsif !session[:exs] %>
+					<%= f.text_field :number, value: decimal_format(@sorted.last.number + @defaults.cue_number_gap), class: "form-control", id: "number-input" %>
+				<% else %>
+					<%= f.text_field :number, value: decimal_format(@cue.number), class: "form-control", id: "number-input" %>
+				<% end %>
 			</div>
 			<div class="form-group col-xs-1" id="time-div">
 				<%= f.label :time %>
-				<%= f.text_field :time, class: "form-control", id: "time-input" %>
+				<% if session[:exs] %>
+					<%= f.text_field :time, value: decimal_format(@cue.time) , class: "form-control", id: "time-input" %>
+				<% else %>	
+					<%= f.text_field :time, value: decimal_format(@defaults.cue_time) , class: "form-control", id: "time-input" %>
+				<% end %>
 			</div>
 			<div class="form-group col-xs-2" id="radio-div">
 				<%= f.label :follow, "Follow Type", id: "radio-cue" %>
@@ -47,7 +60,11 @@
 			</div>
 			<div class="form-group col-xs-1" id="page-div">
 				<%= f.label :page %>
-				<%= f.text_field :page, class: "form-control", id: "page-input" %>
+				<% if !first %>
+					<%= f.text_field :page, value: @sorted.last.page, class: "form-control", id: "page-input" %>
+				<% else %>
+					<%= f.text_field :page, value: 1, class: "form-control", id: "page-input" %>
+				<% end %>
 			</div>
 			<div>
 				<%= hidden_field_tag :show_id, @show.id %>
@@ -59,3 +76,7 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$('#number-input').focus();
+</script>

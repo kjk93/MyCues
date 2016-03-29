@@ -1,6 +1,8 @@
 class CuesController < ApplicationController
 	def new
 		@show = Show.find(params[:show_id])
+		@defaults = @show.show_setting
+		@sorted = @show.cues.sort_by{|e| e[:number]}
 		@cue = Cue.new
 	end
 
@@ -19,6 +21,8 @@ class CuesController < ApplicationController
 	def edit
 		@cue = Cue.find(params[:id])
 		@show = Show.find(@cue.show)
+		@defaults = @show.show_setting
+		@sorted = @show.cues.sort_by{|e| e[:number]}
 	end
 
 	def update

@@ -9,7 +9,7 @@ class ShowSettingsController < ApplicationController
 		@show = @show_setting.show
 		if @show_setting.update_attributes(settings_params)
 			flash[:success] = "Show Settings Updated"
-			redirect_to @user
+			redirect_to edit_show_path(@show)
 		else
 			flash[:danger] = "Could not update defaults"
 			render 'edit'
@@ -18,11 +18,11 @@ class ShowSettingsController < ApplicationController
 
   def destroy
   	@show_setting = ShowSetting.find(params[:id])
-  	@show_setting.delete
+  	@show_setting.destroy
   end
 
   	private
 		def settings_params
-			params.require(:user_setting).permit(:cue_time, :cue_number_gap, :start_cue)
+			params.require(:show_setting).permit(:cue_time, :cue_number_gap, :start_cue)
 		end
 end

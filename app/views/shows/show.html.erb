@@ -1,0 +1,11 @@
+<% provide(:title, @show.title) %>
+<% object_title("show") %>
+<% def_action("show") %>
+
+<div class="container-fluid">
+	<h1><%= @show.title %></h1>
+</div>
+
+<% if @show.cues.any? %>
+	<%= render 'show_cues' %>
+<% end %>

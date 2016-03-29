@@ -43,8 +43,7 @@ class ShowsController < ApplicationController
 	end
 
 	def destroy
-		@show = Show.find(params[:id])
-		@show.delete
+		@show = Show.find(params[:id]).destroy
 		flash[:success] = "#{@show.title} deleted"
 		redirect_to @show.user
 	end

@@ -57,6 +57,17 @@ body{
 	padding-top: 70px;
 }
 
+.z-section{
+	div{
+		position: absolute;
+		z-index: 0;
+	}
+}
+
+.z-front{
+	z-index: 100;
+}
+
 /* Logo */
 #logo{
 	a{

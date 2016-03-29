@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   include SessionsHelper
-  before_action :clear_object_title
+  before_action :clear_temp_session_cookies
 
   def logged_in_user
   	unless logged_in?
@@ -12,7 +12,9 @@ class ApplicationController < ActionController::Base
   	end
   end
 
-  def clear_object_title
+  def clear_temp_session_cookies
     session.delete(:obj)
+    session.delete(:exs)
+    session.delete(:act)
   end
 end
