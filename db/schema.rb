@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(version: 20160327121131) do
     t.datetime "updated_at",                          null: false
   end
 
-  add_index "cues", ["number"], name: "index_cues_on_number"
   add_index "cues", ["show_id"], name: "index_cues_on_show_id"
 
   create_table "show_settings", force: :cascade do |t|
@@ -51,8 +50,16 @@ ActiveRecord::Schema.define(version: 20160327121131) do
   add_index "shows", ["user_id", "created_at"], name: "index_shows_on_user_id_and_created_at"
   add_index "shows", ["user_id"], name: "index_shows_on_user_id"
 
-# Could not dump table "user_settings" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "user_settings", force: :cascade do |t|
+    t.decimal  "cue_time",       default: 3.0
+    t.decimal  "cue_number_gap", default: 2.0
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "user_id"
+    t.integer  "start_cue",      default: 1
+  end
+
+  add_index "user_settings", ["user_id"], name: "index_user_settings_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

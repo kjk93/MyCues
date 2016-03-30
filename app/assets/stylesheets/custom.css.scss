@@ -37,7 +37,7 @@ $box-shadow: #c4c4c4;
 	padding-top: 25px;
 }
 
-h1, h2{
+h1, h2, h3{
 	text-align: center;
 }
 
@@ -126,6 +126,11 @@ body{
 	font-size: 70px;
 	letter-spacing: -5px;
 	color: $logo-red;
+}
+
+/* Home */
+#sign-up-btn{
+	margin-left: 42%
 }
 
 /* footer */
