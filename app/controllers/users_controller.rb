@@ -16,6 +16,7 @@ class UsersController < ApplicationController
 				@setting = @user.build_user_setting
 				if @setting.save
 					flash[:success] = message
+					log_in(@user)
 					redirect_to user_path(@user)
 				else
 					message = "Could not create settings"
@@ -31,6 +32,7 @@ class UsersController < ApplicationController
 				@setting = @user.build_user_setting
 				if @setting.save
 					flash[:success] = message
+					log_in(@user)
 					redirect_to user_path(@user)
 				else
 					message = "Could not create settings"
