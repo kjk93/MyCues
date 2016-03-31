@@ -48,7 +48,6 @@
 								<td><%= q.page %></td>
 							</tr>
 						<% end %>
-						<%= render "add_cue_table" %>
 					</tbody>
 				</table>
 			</div>
@@ -63,7 +62,7 @@
 						<% @cues.each do |q| %>
 							<tr id="delete-cue">
 								<td>
-									<%= link_to cue_path(q.id), method: :delete, data: {confirm: "Delete Cue #{q.number}?"} do %>
+									<%= link_to cue_path(q.id), method: :delete, data: {confirm: "Delete Cue #{decimal_format(q.number)}?"} do %>
 										<span class="glyphicon glyphicon-remove" id="delete-cue-button"></span>
 									<% end %>
 								</td>

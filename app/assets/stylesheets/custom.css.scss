@@ -95,6 +95,10 @@ input[type="radio"]{
 	}
 }
 
+.navbar-default{
+	padding-bottom: 1.5%;
+}
+
 /*Navbar Links */
 #navbar-center{
 	margin-left: 41%;
@@ -365,9 +369,41 @@ footer{
 	margin-right: -3.1%;
 }
 
+#cue-check-box{
+	margin-left: 40%;
+	margin-top: 1%;
+}
+
+/* Inline Cue Form */
+
 #cue-form{
 	margin-left: 6%;
 	margin-right: -6%;
+}
+
+#check-cue{
+	width: 11%;
+}
+
+#follow-group{
+	width: 19.5%;
+}
+
+#number-cue{
+	margin-left: -2%;
+}
+
+#cue-check-box-inline{
+	margin-left: 43%;
+	margin-top: 20%;
+}
+
+#check-label{
+	margin-left: 5%;
+}
+
+#cue-inline-submit{
+	margin-top: 43%;
 }
 
 /*User Home*/
@@ -389,10 +425,6 @@ footer{
 	}
 }
 
-#cue-check-box{
-	margin-left: 40%;
-	margin-top: 1%;
-}
 
 
 

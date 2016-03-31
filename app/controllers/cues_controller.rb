@@ -7,7 +7,7 @@ class CuesController < ApplicationController
 	end
 
 	def create
-		@show = Show.find(params[:show_id])
+		@show = Show.find(params[:show])
 		cue = @show.cues.build(cue_params)
 		if cue.save
 			flash[:success] = "Cue Added"
@@ -29,7 +29,7 @@ class CuesController < ApplicationController
 		@show = Show.find(params[:show_id])
 		@cue = Cue.find(params[:id])
 		if @cue.update_attributes(cue_params)
-			flash[:success] = "Cue #{@cue.number} Updated"
+			flash[:success] = "Cue #{decimal_format(@cue.number)} Updated"
 			redirect_to edit_show_path(@show)
 		else
 			flash[:danger] = "Could not update cue"
@@ -40,8 +40,8 @@ class CuesController < ApplicationController
 
 	def destroy
 		@cue = Cue.find(params[:id]).destroy
-		flash[:success] = "Cue #{@cue.number} deleted"
-		redirect_to @cue.show
+		flash[:success] = "Cue #{decimal_format(@cue.number)} deleted"
+		redirect_to edit_show_path(@cue.show)
 	end
 
 	def show
@@ -51,5 +51,13 @@ class CuesController < ApplicationController
 	private
 		def cue_params
 			params.require(:cue).permit(:auto_follow, :number, :time, :follow, :follow_time, :purpose, :page)
+		end
+
+		def decimal_format(number)
+			if number.floor == number
+				number.round
+			else
+				number
+			end
 		end
 end

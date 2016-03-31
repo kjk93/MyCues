@@ -1,29 +1,30 @@
 <!-- Needs to be its own table, cannot integrate with previous table -->
 
-<tr>
+<div class="col-xs-10 col-xs-offset-1">
 	<% first = true if !@show.cues.any? %>
 	<%= form_for @cue do |f| %>
 		<%= render 'shared/error_messages', object: f.object %>
-		<td class="form-group">
-			<%= f.label :auto_follow, "Auto Follow" %>
-			<%= f.label :auto_follow, class: "checkbox", id:"cue-check-box" do %>
-				<%= f.check_box :auto_follow %>
+		<div class="form-group col-xs-1", id="check-cue">
+			<%= f.label :auto_follow, "Auto Follow", id:"check-label" %>
+			<%= f.label :auto_follow, class: "checkbox" do %>
+				<%= f.check_box :auto_follow, id:"cue-check-box-inline" %>
 			<% end %>
-		</td>
-		<td class="form-group">
+		</div>
+		<div class="form-group col-xs-1" id="number-cue">
 			<%= f.label :number, "Number" %>
 			<% if first %>
 				<%= f.text_field :number, value: decimal_format(@defaults.start_cue), class: "form-control" %>
 			<% else %>
 				<%= f.text_field :number, value: decimal_format(@sorted.last.number + @defaults.cue_number_gap), class: "form-control" %>
 			<% end %>
-		</td>
-		<td class="form-group">
+		</div>
+		<div class="form-group col-xs-1">
 			<%= f.label :time %>
 			<%= f.text_field :time, value: decimal_format(@defaults.cue_time), class: "form-control" %>
-		</td>
-		<td class="form-group col-xs-1">
-			<%= f.label :follow, "Follow/Hang" %>
+		</div>
+		<div class="form-group col-xs-1" id="follow-group">
+			<%= f.label :follow, "Follow/Hang Time" %>
+			<%= f.text_field :follow_time, class: "form-control" %>
 			<%= f.label :follow do %>
 				<%= f.radio_button :follow, 0, checked: true %>None
 			<% end %>
@@ -33,28 +34,28 @@
 			<%= f.label :follow do %>
 				<%= f.radio_button :follow, 2 %>Hang
 			<% end %>
-		</td>
-		<td class="form-group">
-			<%= f.label :follow_time, "F/H Time" %>
-			<%= f.text_field :follow_time, class: "form-control" %>
-		</td>
-		<td class="form-group">
+
+			
+		</div>
+		<div class="form-group col-xs-2">
 			<%= f.label :purpose %>
 			<%= f.text_field :purpose, class: "form-control" %>
-		</td>
-		<td class="form-group">
+		</div>
+		<div class="form-group col-xs-2">
 			<%= f.label :called %>
 			<%= f.text_field :called, class: "form-control" %>
-		</td>
-		<td class="form-group">
+		</div>
+		<div class="form-group col-xs-1">
 			<%= f.label :page %>
 			<% if first %>
 				<%= f.text_field :page, value: 1, class: "form-control" %>
 			<% else %>
 				<%= f.text_field :page, value: @sorted.last.page, class: "form-control" %>
 			<% end %>
-			<%= f.submit "Create", class: "btn btn-sm btn-success" %>
-		</td>
-		
+		</div>
+		<div><%= hidden_field_tag :show, @show.id %></div>
+		<div class="form-group col-xs-1">
+			<%= f.submit "Create", class: "btn btn-sm btn-success", id: "cue-inline-submit" %>
+		</div>
 	<% end %>
-</tr>
+</div>
