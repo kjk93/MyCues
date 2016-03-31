@@ -68,6 +68,10 @@ body{
 	z-index: 100;
 }
 
+input[type="radio"]{
+	margin-right: 5px;
+}
+
 /* Logo */
 #logo{
 	a{
@@ -384,6 +388,13 @@ footer{
 		color: $logo-red;
 	}
 }
+
+#cue-check-box{
+	margin-left: 40%;
+	margin-top: 1%;
+}
+
+
 
 /*Show cuelist*/
 #add-cue{
