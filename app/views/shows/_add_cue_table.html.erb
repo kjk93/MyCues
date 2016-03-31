@@ -1,0 +1,36 @@
+<tr>
+	<% first = true if !@show.cues.any? %>
+	<%= form_for @cue do |f| %>
+		<%= render 'shared/error_messages', object: f.object %>
+		<td class="form-group">
+			<%= f.label :auto_follow, "Auto Follow?" %>
+			<%= f.label :auto_follow, class: "checkbox", id:"cue-check-box" do %>
+				<%= f.check_box :auto_follow %>
+			<% end %>
+		</td>
+		<td class="form-group">
+			<%= f.label :number, "Number" %>
+			<% if first %>
+				<%= text_field :number, value: decimal_format(@defaults.start_cue), class: "form-control" %>
+			<% else %>
+				<%= text_field :number, value: decimal_format(@sorted.last.number + @defaults.cue_number_gap), class: "form-control" %>
+			<% end %>
+		</td>
+		<td class="form-group">
+			<%= f.label :time %>
+			<%= f.text_field :time, value: @defaults.cue_time, class: "form-control" %>
+		</td>
+		<td class="form-group">
+			<%= f.label :follow, "Follow/Hang" %>
+			<%= f.label :follow, class: "radio-follow" do %>
+				<%= f.radio_button :follow, 0, checked: true %>None
+			<% end %>
+			<%= f.label :follow, class: "radio-follow" do %>
+				<%= f.radio_button :follow, 1 %>Follow
+			<% end %>
+			<%= f.label :follow, class: "radio-follow" do %>
+				<%= f.radio_button :follow, 2 %>Hang
+			<% end %>
+		</td>
+	<% end %>
+</tr>
