@@ -1,0 +1,7 @@
+<tr id="delete-cue">
+	<td>
+		<%= link_to cue_path(@cue.id), method: :delete, data: {confirm: "Delete Cue #{decimal_format(@cue.number)}?"} do %>
+			<span class="glyphicon glyphicon-remove" id="delete-cue-button"></span>
+		<% end %>
+	</td>
+</tr>

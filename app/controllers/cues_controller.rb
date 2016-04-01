@@ -8,13 +8,17 @@ class CuesController < ApplicationController
 
 	def create
 		@show = Show.find(params[:show])
-		cue = @show.cues.build(cue_params)
-		if cue.save
-			flash[:success] = "Cue Added"
-			redirect_to edit_show_path(@show)
-		else
-			flash[:danger] = "Cue could not be created"
-			render 'new'
+		@cue = @show.cues.build(cue_params)
+		@defaults = @show.show_setting
+
+		respond_to do |format|
+			if @cue.save
+				format.html {html_create_response(@show.id)}
+				format.js {}
+				format.json {render json: @cue, status: :created, location: @cue}
+			else
+				format.html {html_create_error}
+			end
 		end
 	end
 
@@ -59,5 +63,16 @@ class CuesController < ApplicationController
 			else
 				number
 			end
+		end
+
+		def html_create_response(show_id)
+			@show = Show.find(show_id)
+			flash[:success] = "Cue Added"
+			redirect_to edit_show_path(@show)
+		end
+
+		def html_create_error
+			flash[:danger] = "Cue could not be created"
+			render 'new'
 		end
 end

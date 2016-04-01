@@ -18,7 +18,7 @@
 							<th>Page #</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="list-cues">
 						<% @cues.each do |q| %>
 							<% if session[:act] == "show" %>
 								<tr>
@@ -28,7 +28,6 @@
 								<td>
 									<% if q.auto_follow == true %>
 										<span class="glyphicon glyphicon-ok-circle auto-follow-check"></span>
-									<% else %>
 									<% end %>
 								</td>
 								<td><%= decimal_format(q.number) %></td>
@@ -58,7 +57,7 @@
 			<div class="table-responsive">
 				<table class="table table-striped">
 					<thead><th>Delete</th></thead>
-					<tbody>
+					<tbody id="delete-cue-row">
 						<% @cues.each do |q| %>
 							<tr id="delete-cue">
 								<td>

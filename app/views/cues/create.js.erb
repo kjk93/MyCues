@@ -1,0 +1,9 @@
+$('#list-cues').append('<%= j render partial: 'shows/ajax_create_cue', object: @cue %>');
+
+$('#delete-cue-row').append('<%= j render partial: 'shows/ajax_create_cue_delete', object: @cue %>');
+
+$('#number-cue').find('input').val('<%= decimal_format(@cue.number + @defaults.cue_number_gap) %>');
+
+$('#time-cue').find('input').val('<%= decimal_format(@defaults.cue_time) %>');
+
+$('#page-cue').find('input').val('<%= @cue.page %>');

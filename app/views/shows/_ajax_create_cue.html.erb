@@ -1,0 +1,22 @@
+<tr data-link="<%= edit_cue_path(@cue) %>" >
+	<td>
+		<% if @cue.auto_follow == true %>
+			<span class="glyphicon glyphicon-ok-circle auto-follow-check"></span>
+		<% end %>
+	</td>
+	<td><%= decimal_format(@cue.number) %></td>
+	<td><%= decimal_format(@cue.time) %></td>
+	<td>
+		<% if @cue.follow == 1 %>
+			F - <%= decimal_format(@cue.follow_time) %>
+		<% elsif @cue.follow == 2 %>
+			H - <%= decimal_format(@cue.follow_time) %>
+		<% elsif @cue.follow == 0 %>
+		<% else %>
+			Error
+		<% end %>
+	</td>
+	<td><%= @cue.purpose %></td>
+	<td><%= @cue.called %></td>
+	<td><%= @cue.page %></td>
+</tr>
