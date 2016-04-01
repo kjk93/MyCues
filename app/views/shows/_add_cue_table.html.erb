@@ -56,7 +56,15 @@
 		<div><%= hidden_field_tag :show, @show.id %></div>
 		<div class="form-group col-xs-1">
 			<%= f.submit "", class: "btn btn-lg btn-success", id: "add-cue" %>
-			<span class="glyphicon glyphicon-plus", id="submit-glyph"></span>
+			<%= button_tag "", id: "sudo-button" do %>
+				<span class="glyphicon glyphicon-plus", id="submit-glyph"></span>
+			<% end %>
 		</div>
 	<% end %>
 </div>
+
+<script type="text/javascript">
+	$("#sudo-button").click(function(){
+		$(add-cue).click();
+	});
+</script>
