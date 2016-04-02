@@ -51,6 +51,14 @@ class ShowsController < ApplicationController
 		redirect_to @show.user
 	end
 
+	def quick_add
+		@show = Show.find(params[:id])
+		@defaults = @show.show_setting
+		quick = @defaults.quick
+		@defaults.update_attributes(quick: !quick)
+		redirect_to edit_show_path(@show)
+	end
+
 	private
 		def show_params
 			params.require(:show).permit(:title)

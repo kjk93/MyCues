@@ -1,10 +1,4 @@
 Rails.application.routes.draw do
-  get 'show_settings/edit'
-
-  get 'show_settings/update'
-
-  get 'show_settings/destroy'
-
   root 'home_page#home'
 
   resources :users
@@ -12,6 +6,7 @@ Rails.application.routes.draw do
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
   resources :shows
+  get 'show/:id/settings/quick_add_enabled' => 'shows#quick_add', as: 'quick_add'
   resources :cues
   #resources :user_settings, only:[:edit, :update, :destroy]
 

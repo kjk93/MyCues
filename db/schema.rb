@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160327121131) do
+ActiveRecord::Schema.define(version: 20160401224156) do
 
   create_table "cues", force: :cascade do |t|
     t.decimal  "number",      precision: 7, scale: 2
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20160327121131) do
     t.datetime "updated_at",                          null: false
   end
 
+  add_index "cues", ["number"], name: "index_cues_on_number"
   add_index "cues", ["show_id"], name: "index_cues_on_show_id"
 
   create_table "show_settings", force: :cascade do |t|
@@ -36,6 +37,7 @@ ActiveRecord::Schema.define(version: 20160327121131) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.integer  "show_id"
+    t.boolean  "quick"
   end
 
   add_index "show_settings", ["show_id"], name: "index_show_settings_on_show_id"
