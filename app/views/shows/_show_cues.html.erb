@@ -21,9 +21,9 @@
 					<tbody id="list-cues">
 						<% @cues.each do |q| %>
 							<% if session[:act] == "show" %>
-								<tr>
+								<tr id="cue-row-<%= q.id %>">
 							<% else %>
-								<tr data-link="<%= edit_cue_path(q) %>">
+								<tr id="cue-row-<%= q.id %>" data-link="<%= edit_cue_path(q) %>">
 							<% end %>
 								<td>
 									<% if q.auto_follow == true %>

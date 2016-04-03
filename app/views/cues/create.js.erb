@@ -1,8 +1,9 @@
 $('#list-cues').append('<%= j render partial: 'shows/ajax_create_cue', object: @cue %>');
 
-$('#delete-cue-row').append('<%= j render partial: 'shows/ajax_create_cue_delete', object: @cue %>');
+$('#delete-cue-row').append('<%= j render partial: 'shows/cue_delete', locals: {q: @cue, defaults: @defaults} %>');
 
-$('#number-cue').find('input').val('<%= decimal_format(@cue.number + @defaults.cue_number_gap) %>');
+//change @sorted to @cue when adding individual buttons 
+$('#number-cue').find('input').val('<%= decimal_format(@sorted.last.number + @defaults.cue_number_gap) %>');
 
 $('#time-cue').find('input').val('<%= decimal_format(@defaults.cue_time) %>');
 

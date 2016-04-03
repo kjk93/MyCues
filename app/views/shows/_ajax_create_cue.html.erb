@@ -1,4 +1,4 @@
-<tr data-link="<%= edit_cue_path(@cue) %>" >
+<tr id="cue-row-<%= @cue.id %>" data-link="<%= edit_cue_path(@cue) %>" >
 	<td>
 		<% if @cue.auto_follow == true %>
 			<span class="glyphicon glyphicon-ok-circle auto-follow-check"></span>

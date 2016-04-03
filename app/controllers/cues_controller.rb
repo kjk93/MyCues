@@ -13,6 +13,7 @@ class CuesController < ApplicationController
 
 		respond_to do |format|
 			if @cue.save
+				@sorted = @show.cues.sort_by{|e| e[:number]}
 				format.html {html_create_response(@show.id)}
 				format.js {}
 				format.json {render json: @cue, status: :created, location: @cue}
@@ -44,8 +45,11 @@ class CuesController < ApplicationController
 
 	def destroy
 		@cue = Cue.find(params[:id]).destroy
-		flash[:success] = "Cue #{decimal_format(@cue.number)} deleted"
-		redirect_to edit_show_path(@cue.show)
+
+		respond_to do |format|
+			format.html {html_delete_response(@cue.id)}
+			format.js {}
+		end
 	end
 
 	def show
@@ -74,5 +78,11 @@ class CuesController < ApplicationController
 		def html_create_error
 			flash[:danger] = "Cue could not be created"
 			render 'new'
+		end
+
+		def html_delete_response(cue_id)
+			@cue = Cue.find(cue_id)
+			flash[:success] = "Cue #{decimal_format(@cue.number)} deleted"
+			redirect_to edit_show_path(@cue.show)
 		end
 end

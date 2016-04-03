@@ -14,7 +14,7 @@
 		<% if @defaults.quick == false %>
 			<%= link_to "Quick Edit", quick_add_path(@show.id), remote: true, class: "col-xs-1 col-xs-offset-2 btn btn-success btn-large", id: "quick-edit" %>
 		<% elsif @defaults.quick == true %>
-			<%= link_to "Normal Edit", quick_add_path(@show.id), remote: true, class: "col-xs-1 col-xs-offset-2 btn btn-primary btn-large", id: "quick-edit" %>
+			<%= link_to "Std Edit", quick_add_path(@show.id), remote: true, class: "col-xs-1 col-xs-offset-2 btn btn-primary btn-large", id: "quick-edit" %>
 		<% else %>
 			<div class="col-xs-1 col-xs-offset-2">Error loading Quick Edit</div>
 		<% end %>
