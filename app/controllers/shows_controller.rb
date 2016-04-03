@@ -56,7 +56,12 @@ class ShowsController < ApplicationController
 		@defaults = @show.show_setting
 		quick = @defaults.quick
 		@defaults.update_attributes(quick: !quick)
-		redirect_to edit_show_path(@show)
+
+		respond_to do |format|
+			format.html {redirect_to edit_show_path(@show)}
+			format.js{}
+			format.json{render json: @defaults, status: :updated, location: @defaults}
+		end
 	end
 
 	private

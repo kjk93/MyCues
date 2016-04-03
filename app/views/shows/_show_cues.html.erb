@@ -52,28 +52,10 @@
 			</div>
 		</span>
 	</div>
-	<% if session[:act] == "edit" %>
-		<div class="col-xs-1" id="delete-cue-div">
-			<div class="table-responsive">
-				<table class="table table-striped">
-					<thead><th>Delete</th></thead>
-					<tbody id="delete-cue-row">
-						<% @cues.each do |q| %>
-							<tr id="delete-cue">
-								<td>
-									<%= link_to cue_path(q.id), method: :delete, data: {confirm: "Delete Cue #{decimal_format(q.number)}?"} do %>
-										<span class="glyphicon glyphicon-remove" id="delete-cue-button"></span>
-									<% end %>
-								</td>
-							</tr>
-						<% end %>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	<% end %>
+	<div id="delete-cue-part">
+		<%= render partial: "delete_cues", locals: {cues: @cues, defaults: @defaults} %>
+	</div>
 </div>
-
 <script type="text/javascript">
 	jQuery(function($){
 		$("tr[data-link]").click(function(){

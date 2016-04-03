@@ -13,9 +13,9 @@
 		<div class="form-group col-xs-1" id="number-cue">
 			<%= f.label :number, "Number" %>
 			<% if first %>
-				<%= f.text_field :number, value: decimal_format(@defaults.start_cue), class: "form-control" %>
+				<%= f.text_field :number, value: decimal_format(@defaults.start_cue), class: "form-control", id: 'number-field' %>
 			<% else %>
-				<%= f.text_field :number, value: decimal_format(@sorted.last.number + @defaults.cue_number_gap), class: "form-control" %>
+				<%= f.text_field :number, value: decimal_format(@sorted.last.number + @defaults.cue_number_gap), class: "form-control", id: 'number-field' %>
 			<% end %>
 		</div>
 		<div class="form-group col-xs-1" id="time-cue">
@@ -34,8 +34,6 @@
 			<%= f.label :follow do %>
 				<%= f.radio_button :follow, 2 %>Hang
 			<% end %>
-
-			
 		</div>
 		<div class="form-group col-xs-2">
 			<%= f.label :purpose %>
@@ -64,6 +62,10 @@
 </div>
 
 <script type="text/javascript">
+	<% if @defaults.quick == true %>
+		$('#number-field').focus();
+	<% end %>
+
 	$("#sudo-button").click(function(){
 		$(add-cue).click();
 	});

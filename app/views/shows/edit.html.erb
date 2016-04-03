@@ -11,9 +11,14 @@
 		<!--<%= link_to new_cue_path(show_id: @show.id), class: "col-xs-2 col-xs-offset-2 btn btn-success btn-large", id: "add-cue" do %>
 			<span class="glyphicon glyphicon-plus"></span>
 		<% end %>-->
-		<%= link_to "Quick Edit", quick_add_path(@show.id), class: "col-xs-1 col-xs-offset-2 btn btn-success btn-large" %>
-		<div class="col-xs-1"><%= @defaults.quick %></div>
-		<%= link_to "Delete show", show_path, method: :delete, data:{confirm: "Delete Show #{@show.title}"}, class: "col-xs-2 col-xs-offset-7 btn btn-primary btn-danger", id: "delete-show" %>
+		<% if @defaults.quick == false %>
+			<%= link_to "Quick Edit", quick_add_path(@show.id), remote: true, class: "col-xs-1 col-xs-offset-2 btn btn-success btn-large", id: "quick-edit" %>
+		<% elsif @defaults.quick == true %>
+			<%= link_to "Normal Edit", quick_add_path(@show.id), remote: true, class: "col-xs-1 col-xs-offset-2 btn btn-primary btn-large", id: "quick-edit" %>
+		<% else %>
+			<div class="col-xs-1 col-xs-offset-2">Error loading Quick Edit</div>
+		<% end %>
+		<%= link_to "Delete show", show_path, method: :delete, data:{confirm: "Delete Show #{@show.title}"}, class: "col-xs-2 col-xs-offset-6 btn btn-primary btn-danger", id: "delete-show" %>
 	</div>
 </div>
 

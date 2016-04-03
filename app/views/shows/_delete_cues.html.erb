@@ -1,0 +1,30 @@
+<% if session[:act] == "edit" %>
+	<div class="col-xs-1" id="delete-cue-div">
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<thead><th>Delete</th></thead>
+				<tbody id="delete-cue-row">
+					<% cues.each do |q| %>
+						<tr id="delete-cue">
+							<td>
+								<% if defaults.quick == false %>
+									<%= link_to cue_path(q.id), method: :delete, data: {confirm: "Delete Cue #{decimal_format(q.number)}?"} do %>
+										<span class="glyphicon glyphicon-remove" id="delete-cue-button"></span>
+									<% end %>
+								<% else %>
+									<%= link_to cue_path(q.id), method: :delete do %>
+										<span class="glyphicon glyphicon-remove" id="delete-cue-button"></span>
+									<% end %>
+								<% end %>
+							</td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+<% end %>
+
+<script type="text/javascript">
+	console.log("rendered delete");
+</script>

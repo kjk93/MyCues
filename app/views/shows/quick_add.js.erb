@@ -1,0 +1,17 @@
+<% if @defaults.quick %>
+	console.log('True');
+	$('#quick-edit').removeClass('btn-success');
+	$('#quick-edit').addClass('btn-primary');
+	$('#quick-edit').text("Normal Edit");
+	$('#number-field').focus();
+<% else %>
+	console.log('False')
+	$('#quick-edit').removeClass('btn-primary');
+	$('#quick-edit').addClass('btn-success');
+	$('#quick-edit').text("Quick Edit");
+<% end %>
+
+<% def_action("edit") %>
+
+$('#delete-cue-part').html('<%=j render partial: 'shows/delete_cues', locals: {cues: @show.cues, defaults: @defaults} %>');
+
