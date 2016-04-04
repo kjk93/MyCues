@@ -27,17 +27,16 @@ ActiveRecord::Schema.define(version: 20160401224156) do
     t.datetime "updated_at",                          null: false
   end
 
-  add_index "cues", ["number"], name: "index_cues_on_number"
   add_index "cues", ["show_id"], name: "index_cues_on_show_id"
 
   create_table "show_settings", force: :cascade do |t|
     t.decimal  "cue_time",       default: 3.0
     t.decimal  "cue_number_gap", default: 2.0
     t.integer  "start_cue",      default: 1
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.integer  "show_id"
-    t.boolean  "quick"
+    t.boolean  "quick",          default: false
   end
 
   add_index "show_settings", ["show_id"], name: "index_show_settings_on_show_id"
