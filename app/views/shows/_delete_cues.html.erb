@@ -2,7 +2,10 @@
 	<div class="col-xs-1" id="delete-cue-div">
 		<div class="table-responsive">
 			<table class="table table-striped">
-				<thead><th>Delete</th></thead>
+				<thead>
+					<th>Delete</th>
+					<th></th>
+				</thead>
 				<tbody id="delete-cue-row">
 					<% cues.each do |q| %>
 						<%= render partial: 'cue_delete', locals: {q: q, defaults: defaults} %>

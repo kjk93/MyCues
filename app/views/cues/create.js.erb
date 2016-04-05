@@ -12,3 +12,7 @@ $('#number-cue').find('input').val('<%= decimal_format(@sorted.last.number + @de
 $('#time-cue').find('input').val('<%= decimal_format(@defaults.cue_time) %>');
 
 $('#page-cue').find('input').val('<%= @cue.page %>');
+
+<% if @defaults.quick == true %>
+	$('#number-field').focus();
+<% end %>
