@@ -1,3 +1,7 @@
+<% if @show.cues.count == 1 %>
+	$('#empty-text').remove();
+<% end %>
+
 $('#list-cues').append('<%= j render partial: 'shows/ajax_create_cue', object: @cue %>');
 
 $('#delete-cue-row').append('<%= j render partial: 'shows/cue_delete', locals: {q: @cue, defaults: @defaults} %>');

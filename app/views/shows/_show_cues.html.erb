@@ -19,33 +19,37 @@
 						</tr>
 					</thead>
 					<tbody id="list-cues">
-						<% @cues.each do |q| %>
-							<% if session[:act] == "show" %>
-								<tr id="cue-row-<%= q.id %>">
-							<% else %>
-								<tr id="cue-row-<%= q.id %>" data-link="<%= edit_cue_path(q) %>">
-							<% end %>
-								<td>
-									<% if q.auto_follow == true %>
-										<span class="glyphicon glyphicon-ok-circle auto-follow-check"></span>
-									<% end %>
-								</td>
-								<td><%= decimal_format(q.number) %></td>
-								<td><%= decimal_format(q.time) %></td>
-								<td>
-								<% if q.follow == 1 %>
-									F - <%= decimal_format(q.follow_time) %>
-								<% elsif q.follow == 2 %>
-									H - <%= decimal_format(q.follow_time) %>
-								<% elsif q.follow == 0 %>
+						<% if @show.cues.any? %>
+							<% @cues.each do |q| %>
+								<% if session[:act] == "show" %>
+									<tr id="cue-row-<%= q.id %>">
 								<% else %>
-									Error
+									<tr id="cue-row-<%= q.id %>" data-link="<%= edit_cue_path(q) %>">
 								<% end %>
-								</td>
-								<td><%= q.purpose %></td>
-								<td><%= q.called %></td>
-								<td><%= q.page %></td>
-							</tr>
+									<td>
+										<% if q.auto_follow == true %>
+											<span class="glyphicon glyphicon-ok-circle auto-follow-check"></span>
+										<% end %>
+									</td>
+									<td><%= decimal_format(q.number) %></td>
+									<td><%= decimal_format(q.time) %></td>
+									<td>
+									<% if q.follow == 1 %>
+										F - <%= decimal_format(q.follow_time) %>
+									<% elsif q.follow == 2 %>
+										H - <%= decimal_format(q.follow_time) %>
+									<% elsif q.follow == 0 %>
+									<% else %>
+										Error
+									<% end %>
+									</td>
+									<td><%= q.purpose %></td>
+									<td><%= q.called %></td>
+									<td><%= q.page %></td>
+								</tr>
+							<% end %>
+						<% else %>
+							<tr id="empty-text"><td>This show has no cues.  Start creating cues now.</td></tr>
 						<% end %>
 					</tbody>
 				</table>
