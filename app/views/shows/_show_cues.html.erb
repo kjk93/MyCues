@@ -59,6 +59,9 @@
 	<div id="delete-cue-part">
 		<%= render partial: "delete_cues", locals: {cues: @cues, defaults: @defaults} %>
 	</div>
+	<div id="add-cue-buttons">
+		<%= render partial: "idv_add_cue", locals: {cues: @cues} %>
+	</div>
 </div>
 <script type="text/javascript">
 	jQuery(function($){
