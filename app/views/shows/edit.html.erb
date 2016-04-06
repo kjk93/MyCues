@@ -27,7 +27,12 @@
 <%= render "add_cue_table" %>
 
 <script type="text/javascript">
-	$(".sudo-button").click(function(){
-		$('.add-cue-btn').click();
-	});
+	/*referenced to idv_add_cue */
+	$('.add-cue-after').hover(
+		function(){
+			$(this).fadeIn(500);
+		}, function(){
+			$(this).fadeOut(500);
+		}
+	);
 </script>

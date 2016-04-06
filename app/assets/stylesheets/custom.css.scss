@@ -469,3 +469,23 @@ footer{
 .settings{
 	margin-left: 38%;
 }
+
+.add-cue-after{
+	border-radius: 100%;
+	margin-top: -10%;
+	margin-bottom: -10%;
+}
+
+.table{
+	tbody{
+		tr{
+			td.add-cue-td{
+				border:none;
+			}
+		}
+	}
+}
+
+#add-cue-2{
+	margin-left: -2.6%;
+}
