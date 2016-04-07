@@ -40,4 +40,9 @@
 			}, 500, "linear")
 		}
 	);
+
+	$('.add-cue-td a').click(function(){
+		console.log("#id-test-" + $(this).data('id'));
+		$('cue-row-' + $(this))
+	});
 </script>
