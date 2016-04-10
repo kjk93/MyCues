@@ -17,9 +17,9 @@
 					<div class="table-head cue-col-add col-xs-1">Insert</div>
 				</div>
 				<div id="table-body">
-					<% if @show.cues.any? %>
+					<% if show.cues.any? %>
 						<% n = 1 %>
-						<% @cues.each do |q| %>
+						<% cues.each do |q| %>
 							<% if session[:act] == "show" %>
 								<% if n%2 == 1 %>
 									<div class="row cue-row row-1" id="cue-row-<%= q.id %>">
@@ -28,9 +28,9 @@
 								<% end %>
 							<% else %>
 								<% if n%2 == 1 %>
-									<div class="row cue-row row-1" id="cue-row-<%= q.id %>" data-link="<%= edit_cue_path(q) %>">
+									<div class="row cue-row row-1" id="cue-row-<%= q.id %>" data-link="<%= edit_cue_path(q) %>" data-id="<%= q.id %>">
 								<% else %>
-									<div class="row cue-row row-2" id="cue-row-<%= q.id %>" data-link="<%= edit_cue_path(q) %>">
+									<div class="row cue-row row-2" id="cue-row-<%= q.id %>" data-link="<%= edit_cue_path(q) %>" data-id="<%= q.id %>">
 								<% end %>
 							<% end %>
 										<div class="cue-col-af col-xs-1">
@@ -54,7 +54,7 @@
 										<div class="cue-col-call col-xs-2"><%= q.called %></div>
 										<div class="cue-col-pg col-xs-1"><%= q.page %></div>
 										<div class="cue-col-del col-xs-1" id="delete-cue-<%= q.id %>">
-											<% if @defaults.quick == false %>
+											<% if defaults.quick == false %>
 												<%= link_to cue_path(q.id), method: :delete, remote: true, data: {confirm: "Delete Cue #{decimal_format(q.number)}?"}, class: "cue-del-a" do %>
 													<span class="glyphicon glyphicon-remove delete-cue-button remove-glyph"></span>
 												<% end %>
@@ -65,7 +65,9 @@
 											<% end %>
 										</div>
 										<div class="cue-col-add col-xs-1 add-btn-col">
-											<%= content_tag(:a, content_tag(:span, nil, class: "glyphicon glyphicon-plus submit-glyph-sm"), class: "btn btn-sm btn-success add-cue-after", id: "add-cue-after-#{q.id}") %>
+											<%= link_to(new_cue_path(show_id: q.show, cue_after: q.number), remote: true, data: {id: q.number}, class: "btn btn-sm btn-success add-cue-after", id: "add-cue-after-#{q.id}") do %>
+												<%= content_tag(:span, nil, class: "glyphicon glyphicon-plus submit-glyph-sm") %>
+											<% end %>
 										</div>
 									</div>
 							<% n = n + 1 %>
@@ -78,9 +80,9 @@
 		</span>
 	</div>
 <!-- 	<div id="delete-cue-part">
-		<%= render partial: "delete_cues", locals: {cues: @cues, defaults: @defaults} %>
+		<%# render partial: "delete_cues", locals: {cues: @cues, defaults: @defaults} %>
 	</div>
 	<div id="add-cue-buttons">
-		<%= render partial: "idv_add_cue", locals: {cues: @cues} %>
+		<%# render partial: "idv_add_cue", locals: {cues: @cues} %>
 	</div> -->
 </div>

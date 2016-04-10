@@ -1,0 +1,1 @@
+$('#cue-row-<%= @cue_number %>').after('<%= j render partial: 'shows/add_cue_table', locals: {show: @show, cue: @cue, defaults: @defaults, sorted: @sorted} %>');

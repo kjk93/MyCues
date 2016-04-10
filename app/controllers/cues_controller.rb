@@ -1,9 +1,17 @@
 class CuesController < ApplicationController
 	def new
 		@show = Show.find(params[:show_id])
+		cues = @show.cues
+		number_after = params[:cue_after]
+		@cue_number = cues[cues.index(cues.find_by(number: number_after))-1].id
 		@defaults = @show.show_setting
 		@sorted = @show.cues.sort_by{|e| e[:number]}
 		@cue = Cue.new
+
+		respond_to do |format|
+			format.html{}
+			format.js{}
+		end
 	end
 
 	def create

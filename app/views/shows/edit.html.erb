@@ -8,9 +8,6 @@
 
 <div class="container-fluid" id="edit-show-btns">
 	<div class="row col-xs-10 col-xs-offset-1">
-		<!--<%= link_to new_cue_path(show_id: @show.id), class: "col-xs-2 col-xs-offset-2 btn btn-success btn-large", id: "add-cue" do %>
-			<span class="glyphicon glyphicon-plus"></span>
-		<% end %>-->
 		<% if @defaults.quick == false %>
 			<%= link_to "Quick Edit", quick_add_path(@show.id), remote: true, class: "col-xs-1 col-xs-offset-2 btn btn-success btn-large", id: "quick-edit" %>
 		<% elsif @defaults.quick == true %>
@@ -22,31 +19,9 @@
 	</div>
 </div>
 
-<%= render 'show_cues' %>
+<div id="show-cues-section">
+	<%= render partial: 'show_cues', locals:{show: @show, cues: @cues, defaults: @defaults} %>
+</div>
 
-<<<<<<< HEAD
-<%= render "add_cue_table" %>
+<%= render partial: "add_cue_table", locals: {show: @show, cue: @cue, defaults: @defaults, sorted: @sorted} %>
 
-<script type="text/javascript">
-	/*referenced to idv_add_cue */
-	$('.add-cue-after').hover(
-		function(){
-			$(this).animate({
-				opacity: 1
-			}, 500, "linear")
-		}, 
-		function(){
-			$(this).animate({
-				opacity: 0
-			}, 500, "linear")
-		}
-	);
-
-	$('.add-cue-td a').click(function(){
-		console.log("#id-test-" + $(this).data('id'));
-		$('cue-row-' + $(this))
-	});
-</script>
-=======
-<%= render "add_cue_table" %>
->>>>>>> ui-update

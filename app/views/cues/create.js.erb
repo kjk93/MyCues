@@ -2,9 +2,7 @@
 	$('#empty-text').remove();
 <% end %>
 
-$('#list-cues').append('<%= j render partial: 'shows/ajax_create_cue', object: @cue %>');
-
-$('#delete-cue-row').append('<%= j render partial: 'shows/cue_delete', locals: {q: @cue, defaults: @defaults} %>');
+$('#table-body').append('<%= j render partial: 'shows/ajax_create_cue', locals: {q: @cue, count: @show.cues.count, defaults: @defaults} %>');
 
 //change @sorted to @cue when adding individual buttons 
 $('#number-cue').find('input').val('<%= decimal_format(@sorted.last.number + @defaults.cue_number_gap) %>');
@@ -15,4 +13,6 @@ $('#page-cue').find('input').val('<%= @cue.page %>');
 
 <% if @defaults.quick == true %>
 	$('#number-field').focus();
+<% else %>
+	$('#bottom-add').focus();
 <% end %>

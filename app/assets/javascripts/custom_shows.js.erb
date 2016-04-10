@@ -3,7 +3,7 @@ $(function(){
 		$('.add-cue-btn').click();
 	});
 
-	$('.add-cue-after').hover(
+/*	$('.add-cue-after').hover(
 		function(){
 			$(this).animate({
 				opacity: 1
@@ -14,16 +14,22 @@ $(function(){
 				opacity: 0
 			}, 0, "linear")
 		}
-	);
+	);*/
 
 	$('.cue-row').hover(
 		function(){
 			$(this).css("background-color", "rgba(36, 198, 227, .25)");
+			$('#add-cue-after-' + $(this).data("id")).animate({
+				opacity: 1
+			}, 200, "linear");
 		},
 		function(){
 			$(this).css("background-color", "");
+			$('#add-cue-after-' + $(this).data("id")).animate({
+				opacity: 0
+			}, 0, "linear");
 		}
 	);
 
-	console.log('no error');
+	console.log('No errors occured while loading JS');
 });
