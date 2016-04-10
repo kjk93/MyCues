@@ -6,7 +6,7 @@
 	<h1><%= @show.title %></h1>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid" id="edit-show-btns">
 	<div class="row col-xs-10 col-xs-offset-1">
 		<!--<%= link_to new_cue_path(show_id: @show.id), class: "col-xs-2 col-xs-offset-2 btn btn-success btn-large", id: "add-cue" do %>
 			<span class="glyphicon glyphicon-plus"></span>
@@ -24,6 +24,7 @@
 
 <%= render 'show_cues' %>
 
+<<<<<<< HEAD
 <%= render "add_cue_table" %>
 
 <script type="text/javascript">
@@ -46,3 +47,6 @@
 		$('cue-row-' + $(this))
 	});
 </script>
+=======
+<%= render "add_cue_table" %>
+>>>>>>> ui-update

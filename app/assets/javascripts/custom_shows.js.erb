@@ -1,0 +1,29 @@
+$(function(){
+	$(".sudo-button").click(function(){
+		$('.add-cue-btn').click();
+	});
+
+	$('.add-cue-after').hover(
+		function(){
+			$(this).animate({
+				opacity: 1
+			}, 200, "linear")
+		}, 
+		function(){
+			$(this).animate({
+				opacity: 0
+			}, 0, "linear")
+		}
+	);
+
+	$('.cue-row').hover(
+		function(){
+			$(this).css("background-color", "rgba(36, 198, 227, .25)");
+		},
+		function(){
+			$(this).css("background-color", "");
+		}
+	);
+
+	console.log('no error');
+});

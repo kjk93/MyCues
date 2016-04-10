@@ -16,9 +16,15 @@ $text-teal: #28a189;
 $hover-orange: #eb8a0c;
 $light-black: #474540;
 $light-gray: #eaeaea;
-$light-red: #ff6557;
-$logo-red: #e33424;
-$second-blue: #2daee0;
+$light-red: RGBA(255, 101, 87, 1);
+$faded-red: RGBA(227, 52, 36, .1);
+$logo-red: RGBA(227, 52, 36, 1);
+$second-blue: RGBA(45, 174, 224, 1);
+$faded-blue: RGBA(45, 174, 224, .1);
+$hover-blue: rgba(36, 198, 227, .25);
+$second-red: #fab4b4;
+$bg-red: #fad4d4;
+$bg-blue: #2daee0;
 $box-shadow: #c4c4c4;
 
 /* universal */
@@ -447,9 +453,12 @@ footer{
 	font-size: 200%;
 }
 
-#delete-show{
-	margin-top: 1.9%;
-	margin-left: 55%;
+.remove-glyph{
+	margin-top: 5.5px;
+}
+
+#edit-show-btns{
+	margin-bottom: 2%;
 }
 
 .glyphicon-remove{
@@ -461,8 +470,54 @@ footer{
 	margin-left: -30px;
 }
 
-#delete-cue-button{
+.delete-cue-button{
 	outline: none;
+}
+
+.add-cue-after{
+	margin: 0;
+	border-radius: 100%;
+	opacity: 0;
+}
+
+/* Rows */
+.table-head{
+	font-size: 150%;
+	border-bottom-color: $second-blue;
+	border-bottom-width: 4px;
+	border-bottom-style: solid;
+}
+
+.cue-row{
+	font-size: 150%;
+	border-bottom-color: rgba(0,0,0,.5);
+	border-bottom-width: .5px;
+	border-bottom-style: solid;
+	padding-bottom: 8.5px; /*Adjust padding when editing elements inside row */
+	padding-top: 10px;
+}
+
+.row-2{
+	background-color: $faded-blue;
+}
+
+/* Columns */
+.cue-col-af{
+	width: 12.5%;
+}
+
+.cue-col-num{
+	width: 5%;
+	padding-left: .3%;
+	padding-right: .3%;
+}
+
+.cue-col-time{
+	margin-right: -2%;
+}
+
+.cue-col-pg{
+	width: 8.8%;
 }
 
 /* Settings */

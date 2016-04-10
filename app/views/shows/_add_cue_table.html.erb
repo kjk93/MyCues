@@ -1,5 +1,3 @@
-<!-- Needs to be its own table, cannot integrate with previous table -->
-
 <div class="col-xs-10 col-xs-offset-1">
 	<% first = true if !@show.cues.any? %>
 	<%= form_for @cue, remote: true do |f| %>
@@ -65,8 +63,4 @@
 	<% if @defaults.quick == true %>
 		$('#number-field').focus();
 	<% end %>
-
-	$(".sudo-button").click(function(){
-		$('.add-cue-btn').click();
-	});
 </script>

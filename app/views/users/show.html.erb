@@ -3,6 +3,10 @@
 
 <div class="container-fluid">
 	<div class="row">
+		<h1><%= @user.name %></h1>
+	</div>
+
+	<div class="row">
 		<div class="col-xs-2 center-page-2">
 			<%= link_to "New Show", new_show_path, class: "btn btn-success btn-large btn-block", id: "new-show-btn" %>
 		</div>
