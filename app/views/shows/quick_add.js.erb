@@ -11,5 +11,5 @@
 
 <% def_action("edit") %>
 
-$('#delete-cue-part').html('<%=j render partial: 'shows/delete_cues', locals: {cues: @show.cues, defaults: @defaults} %>');
+$('#delete-cue-part').html('<%=j render partial: 'shows/show_cues', locals: {cues: @show.cues, defaults: @defaults} %>');
 

@@ -33,41 +33,41 @@
 									<div class="row cue-row row-2" id="cue-row-<%= q.id %>" data-link="<%= edit_cue_path(q) %>">
 								<% end %>
 							<% end %>
-								<div class="cue-col-af col-xs-1">
-									<% if q.auto_follow == true %>
-										<span class="glyphicon glyphicon-ok-circle auto-follow-check"></span>
-									<% end %>
-								</div>
-								<div class="cue-col-num col-xs-1"><%= decimal_format(q.number) %></div>
-								<div class="cue-col-time col-xs-1"><%= decimal_format(q.time) %></div>
-								<div class="cue-col-fh col-xs-2">
-								<% if q.follow == 1 %>
-									F - <%= decimal_format(q.follow_time) %>
-								<% elsif q.follow == 2 %>
-									H - <%= decimal_format(q.follow_time) %>
-								<% elsif q.follow == 0 %>
-								<% else %>
-									Error
-								<% end %>
-								</div>
-								<div class="cue-col-pur col-xs-2"><%= q.purpose %></div>
-								<div class="cue-col-call col-xs-2"><%= q.called %></div>
-								<div class="cue-col-pg col-xs-1"><%= q.page %></div>
-								<div class="cue-col-del col-xs-1" id="delete-cue-<%= q.id %>">
-									<% if @defaults.quick == false %>
-										<%= link_to cue_path(q.id), method: :delete, remote: true, data: {confirm: "Delete Cue #{decimal_format(q.number)}?"} do %>
-											<span class="glyphicon glyphicon-remove" id="delete-cue-button"></span>
+										<div class="cue-col-af col-xs-1">
+											<% if q.auto_follow == true %>
+												<span class="glyphicon glyphicon-ok-circle auto-follow-check"></span>
+											<% end %>
+										</div>
+										<div class="cue-col-num col-xs-1"><%= decimal_format(q.number) %></div>
+										<div class="cue-col-time col-xs-1"><%= decimal_format(q.time) %></div>
+										<div class="cue-col-fh col-xs-2">
+										<% if q.follow == 1 %>
+											F - <%= decimal_format(q.follow_time) %>
+										<% elsif q.follow == 2 %>
+											H - <%= decimal_format(q.follow_time) %>
+										<% elsif q.follow == 0 %>
+										<% else %>
+											Error
 										<% end %>
-									<% else %>
-										<%= link_to cue_path(q.id), method: :delete, remote: true do %>
-											<span class="glyphicon glyphicon-remove" id="delete-cue-button"></span>
-										<% end %>
-									<% end %>
-								</div>
-								<div class="cue-col-add col-xs-1">
-									<%= content_tag(:a, content_tag(:span, nil, class: "glyphicon glyphicon-plus submit-glyph-sm"), class: "btn btn-sm btn-success add-cue-after", id: "add-cue-after-#{q.id}") %>
-								</div>
-							</div>
+										</div>
+										<div class="cue-col-pur col-xs-2"><%= q.purpose %></div>
+										<div class="cue-col-call col-xs-2"><%= q.called %></div>
+										<div class="cue-col-pg col-xs-1"><%= q.page %></div>
+										<div class="cue-col-del col-xs-1" id="delete-cue-<%= q.id %>">
+											<% if @defaults.quick == false %>
+												<%= link_to cue_path(q.id), method: :delete, remote: true, data: {confirm: "Delete Cue #{decimal_format(q.number)}?"}, class: "cue-del-a" do %>
+													<span class="glyphicon glyphicon-remove delete-cue-button remove-glyph"></span>
+												<% end %>
+											<% else %>
+												<%= link_to cue_path(q.id), method: :delete, remote: true, class: "cue-del-a" do %>
+													<span class="glyphicon glyphicon-remove delete-cue-button remove-glyph"></span>
+												<% end %>
+											<% end %>
+										</div>
+										<div class="cue-col-add col-xs-1 add-btn-col">
+											<%= content_tag(:a, content_tag(:span, nil, class: "glyphicon glyphicon-plus submit-glyph-sm"), class: "btn btn-sm btn-success add-cue-after", id: "add-cue-after-#{q.id}") %>
+										</div>
+									</div>
 							<% n = n + 1 %>
 						<% end %>
 					<% else %>

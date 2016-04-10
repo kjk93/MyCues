@@ -21,6 +21,7 @@ $faded-red: RGBA(227, 52, 36, .1);
 $logo-red: RGBA(227, 52, 36, 1);
 $second-blue: RGBA(45, 174, 224, 1);
 $faded-blue: RGBA(45, 174, 224, .1);
+$hover-blue: rgba(36, 198, 227, .25);
 $second-red: #fab4b4;
 $bg-red: #fad4d4;
 $bg-blue: #2daee0;
@@ -452,6 +453,10 @@ footer{
 	font-size: 200%;
 }
 
+.remove-glyph{
+	margin-top: 5.5px;
+}
+
 #edit-show-btns{
 	margin-bottom: 2%;
 }
@@ -465,12 +470,14 @@ footer{
 	margin-left: -30px;
 }
 
-#delete-cue-button{
+.delete-cue-button{
 	outline: none;
 }
 
 .add-cue-after{
 	margin: 0;
+	border-radius: 100%;
+	opacity: 0;
 }
 
 /* Rows */
@@ -486,7 +493,7 @@ footer{
 	border-bottom-color: rgba(0,0,0,.5);
 	border-bottom-width: .5px;
 	border-bottom-style: solid;
-	padding-bottom: 10px;
+	padding-bottom: 8.5px; /*Adjust padding when editing elements inside row */
 	padding-top: 10px;
 }
 
