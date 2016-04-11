@@ -23,5 +23,7 @@
 	<%= render partial: 'show_cues', locals:{show: @show, cues: @cues, defaults: @defaults} %>
 </div>
 
-<%= render partial: "add_cue_table", locals: {show: @show, cue: @cue, defaults: @defaults, sorted: @sorted} %>
+<div class="col-xs-10 col-xs-offset-1" id="add-last-div">
+	<%= render partial: "add_cue_table", locals: {show: @show, cue: @cue, defaults: @defaults, sorted: @sorted} %>
+</div>
 
