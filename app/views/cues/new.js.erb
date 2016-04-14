@@ -1,3 +1,11 @@
 $('#cue-row-<%= @cue_number %>').after('<div class="row cue-row" id="added-ajax-cue"></div>');
 
 $('#added-ajax-cue').append('<%= j render partial: 'shows/add_cue_table', locals: {show: @show, cue: @cue, defaults: @defaults, sorted: @sorted} %>');
+
+$('#added-ajax-cue').animate({height: "hide"}, 0, "linear");
+
+$('#number-field').focus();
+
+$('#added-ajax-cue').animate({
+	height: "show"
+}, 1000, "easeOutBounce");
