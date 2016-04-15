@@ -1,11 +1,44 @@
+var dup_add = false;
+
+if($('#added-ajax-cue').length){
+	dup_add = true;
+	$('#added-ajax-cue').addClass("to-remove");
+	$('#added-ajax-cue').removeAttr('id');
+	
+}
+
 $('#cue-row-<%= @cue_number %>').after('<div class="row cue-row" id="added-ajax-cue"></div>');
 
 $('#added-ajax-cue').append('<%= j render partial: 'shows/add_cue_table', locals: {show: @show, cue: @cue, defaults: @defaults, sorted: @sorted} %>');
 
 $('#added-ajax-cue').animate({height: "hide"}, 0, "linear");
 
-$('#number-field').focus();
+if(dup_add == true){
+	
+	console.log('true');
 
-$('#added-ajax-cue').animate({
-	height: "show"
-}, 1000, "easeOutBounce");
+	addCueForm();
+
+	$('.to-remove').animate({
+		height: "hide"
+	}, {duration: 500,
+	 	easing: "linear",
+	 	queue: false
+	});
+}
+
+else{
+	console.log('false');
+	addCueForm();
+}
+
+function addCueForm(){
+	console.log('called');
+	$('#added-ajax-cue').animate({
+		height: "show"
+	}, {duration: 500,
+	 	easing: "linear",
+	 	queue: false
+	});
+}
+
