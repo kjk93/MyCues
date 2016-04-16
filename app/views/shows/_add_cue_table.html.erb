@@ -51,10 +51,7 @@
 		</div>
 		<div><%= hidden_field_tag :show, show.id %></div>
 		<div class="form-group col-xs-1">
-			<%= f.submit "", class: "btn btn-lg btn-success add-cue-btn", id: "bottom-add" %>
-			<%= link_to "#", class: "sudo-button" do %>
-				<span class="glyphicon glyphicon-plus submit-glyph"></span>
-			<% end %>
+			<%= f.submit "Save", class: "btn btn-success", id: "bottom-add" %>
 		</div>
 	<% end %>
 </div>

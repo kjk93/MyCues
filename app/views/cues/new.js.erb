@@ -23,7 +23,10 @@ if(dup_add == true){
 		height: "hide"
 	}, {duration: 500,
 	 	easing: "linear",
-	 	queue: false
+	 	queue: false,
+	 	complete: function(){
+	 		$(this).remove();
+	 	}
 	});
 }
 
