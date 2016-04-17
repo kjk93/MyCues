@@ -16,6 +16,16 @@ $(function(){
 		}
 	);*/
 
+	add_hover_event();
+
+	$('#quick-edit').on('ajax:success',function(){
+		add_hover_event();
+	});
+
+	console.log('No errors occured while loading JS');
+});
+
+function add_hover_event(){
 	$('.cue-row').hover(
 		function(){
 			$(this).css("background-color", "rgba(36, 198, 227, .25)");
@@ -30,6 +40,4 @@ $(function(){
 			}, 0, "linear");
 		}
 	);
-
-	console.log('No errors occured while loading JS');
-});
+}
