@@ -384,6 +384,19 @@ footer{
 	margin-top: 1%;
 }
 
+#number-cue{
+	padding-right: 0.5%;
+	width: 7%;
+}
+
+#time-cue{
+	padding-left: 0.5%;
+	padding-right: 0.5%;
+	width: 7%;
+}
+
+
+
 /* Inline Cue Form */
 
 #cue-form{
@@ -396,7 +409,8 @@ footer{
 }
 
 #follow-group{
-	width: 19.5%;
+	width: 15%;
+	padding-left: .5%;
 }
 
 #cue-check-box-inline{
@@ -416,9 +430,34 @@ footer{
 	font-size: 71.4%;
 }
 
-#bottom-add{
+#add-cue-inline-btn{
 	margin-top: 43%;
-	margin-left: -50%;
+	margin-left: 12%;
+}
+
+#add-close{
+	margin-top: 2.4%;
+}
+
+#add-btn-div{
+	margin-left: .3%;
+}
+
+#radio-holder-add{
+	width: 80%;
+	padding-left: 25%;
+	text-align: left;
+}
+
+#called-cue{
+	width: 17.4%;
+	padding-left: .5%;
+	padding-right: .5%;
+}
+
+#purpose-cue{
+	padding-left: .5%;
+	padding-right: .5%;
 }
 
 /*User Home*/

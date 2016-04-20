@@ -3,29 +3,22 @@ $(function(){
 		$('.add-cue-btn').click();
 	});
 
-/*	$('.add-cue-after').hover(
-		function(){
-			$(this).animate({
-				opacity: 1
-			}, 200, "linear")
-		}, 
-		function(){
-			$(this).animate({
-				opacity: 0
-			}, 0, "linear")
-		}
-	);*/
-
-	add_hover_event();
+	add_listeners();
 
 	$('#quick-edit').on('ajax:success',function(){
-		add_hover_event();
+		add_listeners();
 	});
+
+	if($('#number-field').length){// if a number field exists
+		<%# if defaults.quick == true %> //need to fix, causes error
+			$('#number-field').focus();
+		<%# end %>
+	}
 
 	console.log('No errors occured while loading JS');
 });
 
-function add_hover_event(){
+function add_listeners(){
 	$('.cue-row').hover(
 		function(){
 			$(this).css("background-color", "rgba(36, 198, 227, .25)");
@@ -38,6 +31,29 @@ function add_hover_event(){
 			$('#add-cue-after-' + $(this).data("id")).animate({
 				opacity: 0
 			}, 0, "linear");
+		}
+	);
+
+	add_remove_listener()
+}
+
+function add_remove_listener(){
+	$('#add-close').click(
+		function(){
+			console.log('clicked');
+			var prevH = $('#added-ajax-cue').height();
+			$('#added-ajax-cue').wrap('<div id="height-maintain"></div>');
+			$('#added-ajax-cue').css({'border': 'none', 'z-index': '100'});
+			$('#added-ajax-cue').hide("slide", {direction: "right"}, 250, function(){
+				$('#height-maintain').css('padding-top', prevH);
+			});
+			$('#height-maintain').animate({
+				height: 'hide'
+			}, 250, "linear", function(){
+				$('#added-ajax-cue').remove();
+				$('#height-maintain').remove();
+			});
+			
 		}
 	);
 }

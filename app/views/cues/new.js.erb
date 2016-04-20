@@ -1,21 +1,22 @@
 var dup_add = false;
 
-if($('#added-ajax-cue').length){
+if($('#added-ajax-cue').length){//Check if the entry point already exists
 	dup_add = true;
 	$('#added-ajax-cue').addClass("to-remove");
 	$('#added-ajax-cue').removeAttr('id');
-	
 }
 
-$('#cue-row-<%= @cue_number %>').after('<div class="row cue-row" id="added-ajax-cue"></div>');
+<% if @cue_index < 0%>
+	$('#top-add').after('<div class="row cue-row" id="added-ajax-cue"></div>');
+<% else %>
+	$('#cue-row-<%= @cue_number %>').after('<div class="row cue-row" id="added-ajax-cue"></div>');
+<% end %>
 
 $('#added-ajax-cue').append('<%= j render partial: 'shows/add_cue_table', locals: {show: @show, cue: @cue, defaults: @defaults, sorted: @sorted} %>');
 
 $('#added-ajax-cue').animate({height: "hide"}, 0, "linear");
 
 if(dup_add == true){
-	
-	console.log('true');
 
 	addCueForm();
 
@@ -25,23 +26,28 @@ if(dup_add == true){
 	 	easing: "linear",
 	 	queue: false,
 	 	complete: function(){
+	 		$(this).empty();
 	 		$(this).remove();
+	 		$('#number-field').focus();
 	 	}
 	});
 }
 
 else{
-	console.log('false');
 	addCueForm();
 }
 
+add_remove_listener();
+
 function addCueForm(){
-	console.log('called');
 	$('#added-ajax-cue').animate({
 		height: "show"
 	}, {duration: 500,
 	 	easing: "linear",
-	 	queue: false
+	 	queue: false,
+	 	complete: function(){
+	 		$('#number-field').focus();
+	 	}
 	});
 }
 

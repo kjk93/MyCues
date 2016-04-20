@@ -17,6 +17,7 @@
 					<div class="table-head cue-col-add col-xs-1">Insert</div>
 				</div>
 				<div id="table-body">
+				<div id="top-add"></div>
 					<% if show.cues.any? %>
 						<% n = 1 %>
 						<% cues.each do |q| %>
@@ -72,6 +73,7 @@
 									</div>
 							<% n = n + 1 %>
 						<% end %>
+						<%# render 'add_cue_table', locals: {show: show, cue: Cue.new, defaults:defaults, sorted: @sorted} %>
 					<% else %>
 						<div id="empty-text">This show has no cues.  Start creating cues now.</div>
 					<% end %>
