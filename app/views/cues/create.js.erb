@@ -2,17 +2,23 @@
 	$('#empty-text').remove();
 <% end %>
 
-$('#table-body').append('<%= j render partial: 'shows/ajax_create_cue', locals: {q: @cue, count: @show.cues.count, defaults: @defaults} %>');
+//$('#table-body').append('<%= j render partial: 'shows/ajax_create_cue', locals: {q: @cue, count: @show.cues.count, defaults: @defaults} %>');
 
-//change @sorted to @cue when adding individual buttons 
+$('#cue-row-<%= @cue_after.id %>').before('<%= j render partial: 'shows/ajax_create_cue', locals: {q: @cue, count: @show.cues.count, defaults: @defaults} %>');
+
+$('#added-ajax-cue').remove();
+
+/*change @sorted to @cue when adding individual buttons 
 $('#number-cue').find('input').val('<%= decimal_format(@sorted.last.number + @defaults.cue_number_gap) %>');
 
 $('#time-cue').find('input').val('<%= decimal_format(@defaults.cue_time) %>');
 
 $('#page-cue').find('input').val('<%= @cue.page %>');
-
+*/
 <% if @defaults.quick == true %>
 	$('#number-field').focus();
 <% else %>
 	$('#bottom-add').focus();
 <% end %>
+
+add_listeners();

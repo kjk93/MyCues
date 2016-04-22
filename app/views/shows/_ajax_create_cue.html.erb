@@ -1,7 +1,7 @@
 <% if count%2 == 1%>
-	<div class="row cue-row row-1" id="cue-row-<%= q.id %>" data-link="<%= edit_cue_path(q) %>">
+	<div class="row cue-row row-1" id="cue-row-<%= q.id %>" data-link="<%= edit_cue_path(q) %>" data-id="<%= q.id %>">
 <% else %>
-	<div class="row cue-row row-2" id="cue-row-<%= q.id %>" data-link="<%= edit_cue_path(q) %>">
+	<div class="row cue-row row-2" id="cue-row-<%= q.id %>" data-link="<%= edit_cue_path(q) %>" data-id="<%= q.id %>">
 <% end %>
 		<div class="cue-col-af col-xs-1">
 			<% if q.auto_follow == true %>
@@ -35,6 +35,10 @@
 			<% end %>
 		</div>
 		<div class="cue-col-add col-xs-1 add-btn-col">
-			<%= content_tag(:a, content_tag(:span, nil, class: "glyphicon glyphicon-plus submit-glyph-sm"), class: "btn btn-sm btn-success add-cue-after", id: "add-cue-after-#{q.id}") %>
+			<%# content_tag(:a, content_tag(:span, nil, class: "glyphicon glyphicon-plus submit-glyph-sm"), data: {id: q.number}, class: "btn btn-sm btn-success add-cue-after", id: "add-cue-after-#{q.id}") %>
+
+			<%= link_to(new_cue_path(show_id: q.show, cue_after: q.number), remote: true, data: {id: q.number}, class: "btn btn-sm btn-success add-cue-after", id: "add-cue-after-#{q.id}") do %>
+				<%= content_tag(:span, nil, class: "glyphicon glyphicon-plus submit-glyph-sm") %>
+			<% end %>
 		</div>
 	</div>

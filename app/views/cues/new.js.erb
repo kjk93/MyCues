@@ -6,13 +6,18 @@ if($('#added-ajax-cue').length){//Check if the entry point already exists
 	$('#added-ajax-cue').removeAttr('id');
 }
 
-<% if @cue_index < 0%>
+<% if @cue_index < 0 #Inserting at the first position%>
+	<% if @new_num - @defaults.cue_number_gap < 0.01%>
+		<% @new_num = 0.1 %>
+	<% else %>
+		<% @new_num = @new_num - @defaults.cue_number_gap %>
+	<% end %>
 	$('#top-add').after('<div class="row cue-row" id="added-ajax-cue"></div>');
 <% else %>
-	$('#cue-row-<%= @cue_number %>').after('<div class="row cue-row" id="added-ajax-cue"></div>');
+	$('#cue-row-<%= @cue_id %>').after('<div class="row cue-row" id="added-ajax-cue"></div>');
 <% end %>
 
-$('#added-ajax-cue').append('<%= j render partial: 'shows/add_cue_table', locals: {show: @show, cue: @cue, defaults: @defaults, sorted: @sorted} %>');
+$('#added-ajax-cue').append('<%= j render partial: 'shows/add_cue_table', locals: {show: @show, cue: @cue, defaults: @defaults, cue_before: @cue_before, new_num: @new_num, cue_after: @cue_after} %>');
 
 $('#added-ajax-cue').animate({height: "hide"}, 0, "linear");
 
@@ -22,7 +27,7 @@ if(dup_add == true){
 
 	$('.to-remove').animate({
 		height: "hide"
-	}, {duration: 500,
+	}, {duration: 200,
 	 	easing: "linear",
 	 	queue: false,
 	 	complete: function(){
@@ -42,7 +47,7 @@ add_remove_listener();
 function addCueForm(){
 	$('#added-ajax-cue').animate({
 		height: "show"
-	}, {duration: 500,
+	}, {duration: 200,
 	 	easing: "linear",
 	 	queue: false,
 	 	complete: function(){

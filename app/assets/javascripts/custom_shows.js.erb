@@ -25,6 +25,7 @@ function add_listeners(){
 			$('#add-cue-after-' + $(this).data("id")).animate({
 				opacity: 1
 			}, 200, "linear");
+			console.log($(this).data("id"));
 		},
 		function(){
 			$(this).css("background-color", "");
