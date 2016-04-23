@@ -3,21 +3,29 @@ class CuesController < ApplicationController
 		@show = Show.find(params[:show_id])
 		cues = @show.cues
 		number_after = params[:cue_after]
-		idx = cues.index(cues.find_by(number: number_after))
-		@cue_index = idx-1
+		if number_after.to_i == -200 #flag for adding to end
+			@cue_index = cues.index(cues.last)
+		else
+			idx = cues.index(cues.find_by(number: number_after))
+			@cue_index = idx-1
+		end
 		@cue_before = Cue.find(cues[@cue_index].id)
 		@cue_id = @cue_before.id
+		@defaults = @show.show_setting
 
 		#Pass New Cue Number
-		@cue_after = Cue.find(cues[idx].id)#finds cue after number
-		if idx == 0
-			@new_num = @cue_after.number
+		if number_after.to_i == -200
+			@new_num = @cue_before.number + @defaults.cue_number_gap
 		else
-			#Avgerages the cue before and the cue after
-			@new_num = (@cue_after.number + @cue_before.number)/2
+			@cue_after = Cue.find(cues[idx].id)#finds cue after number
+			if idx == 0
+				@new_num = @cue_after.number
+			else
+				#Avgerages the cue before and the cue after
+				@new_num = (@cue_after.number + @cue_before.number)/2
+			end
 		end
 
-		@defaults = @show.show_setting
 		@sorted = @show.cues.sort_by{|e| e[:number]}
 		@cue = Cue.new
 

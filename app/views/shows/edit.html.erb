@@ -28,6 +28,12 @@
 		<%= render partial: 'shows/add_cue_table', locals: {show: @show, cue: @cue, defaults: @defaults, cue_before: @cues.last, new_num: @cues.last.number + @defaults.cue_number_gap} %>
 	</div>
 <% else %>
-	<div class="add"
+	<div class="container-fluid">
+		<%= link_to new_cue_path(show_id: @show.id, cue_after: -200), remote: true, data: {id: @cues.last.number}, id: "add-cue-after-#{@cues.last.id}" do %>
+			<div class="row cue-row text-center col-xs-10 col-xs-offset-1" id="add-cue-holder">
+				Click here to add a cue to the end of the list
+			</div>
+		<% end %>
+	</div>
 <% end %>
 

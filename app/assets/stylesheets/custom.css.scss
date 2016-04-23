@@ -22,6 +22,10 @@ $logo-red: RGBA(227, 52, 36, 1);
 $second-blue: RGBA(45, 174, 224, 1);
 $faded-blue: RGBA(45, 174, 224, .1);
 $hover-blue: rgba(36, 198, 227, .25);
+$faded-green: rgba(100, 255, 64, .35);
+$hover-green: rgba(75, 175, 30, .45);
+$text-green: rgba(51, 153, 51, .75);
+$hover-text-green: rgba(0,100, 0, .75);
 $second-red: #fab4b4;
 $bg-red: #fad4d4;
 $bg-blue: #2daee0;
@@ -527,6 +531,16 @@ footer{
 #quick-add{
 	border-bottom: none;
 	font-size: 150%;
+	padding-top: 1%;
+}
+
+#add-cue-holder{
+	background-color: $faded-green;
+	color: $text-green;
+	&:hover{
+		background-color: $hover-green;
+		color: $hover-text-green;
+	}
 }
 
 /* Rows */
@@ -566,7 +580,7 @@ footer{
 }
 
 .cue-col-pg{
-	width: 8.8%;
+	width: 9%;
 }
 
 /* Settings */
