@@ -3,10 +3,11 @@
 <% end %>
 
 //$('#table-body').append('<%= j render partial: 'shows/ajax_create_cue', locals: {q: @cue, count: @show.cues.count, defaults: @defaults} %>');
-
-$('#cue-row-<%= @cue_after.id %>').before('<%= j render partial: 'shows/ajax_create_cue', locals: {q: @cue, count: @show.cues.count, defaults: @defaults} %>');
+$('#added-ajax-cue').after('<%= j render partial: 'shows/ajax_create_cue', locals: {q: @cue, count: @show.cues.count, defaults: @defaults} %>');
 
 $('#added-ajax-cue').remove();
+
+change_colors(<%= @cue_before.id %>);
 
 /*change @sorted to @cue when adding individual buttons 
 $('#number-cue').find('input').val('<%= decimal_format(@sorted.last.number + @defaults.cue_number_gap) %>');

@@ -31,6 +31,12 @@ class ShowsController < ApplicationController
 		@cue = Cue.new
 		@defaults = @show.show_setting
 		@sorted = @cues.sort_by{|e| e[:number]}
+		if @defaults.quick
+			@quick = true
+			@cue = Cue.new
+		else
+			@quick = false
+		end
 	end
 
 	def update

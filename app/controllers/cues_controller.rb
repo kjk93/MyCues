@@ -31,7 +31,7 @@ class CuesController < ApplicationController
 		@show = Show.find(params[:show])
 		@cue = @show.cues.build(cue_params)
 		@defaults = @show.show_setting
-		@cue_after = Cue.find(params[:cue_after])
+		@cue_before = Cue.find(params[:cue_before])
 
 		respond_to do |format|
 			if @cue.save
@@ -66,7 +66,10 @@ class CuesController < ApplicationController
 
 
 	def destroy
-		@cue = Cue.find(params[:id]).destroy
+		@cue = Cue.find(params[:id])
+		show = @cue.show
+		@cue_before = Cue.find(show.cues[show.cues.index(show.cues.find_by(id: params[:id]))-1].id)
+		@cue.destroy
 
 		respond_to do |format|
 			format.html {html_delete_response(@cue.id)}

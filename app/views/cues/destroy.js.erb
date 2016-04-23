@@ -1,2 +1,7 @@
 $('#temp').remove();
+
+slide_exit($('<%= "#cue-row-#{@cue.id}" %>'));
+
 $('<%= "#cue-row-#{@cue.id}" %>').remove();
+
+change_colors(<%= @cue_before.id %>);

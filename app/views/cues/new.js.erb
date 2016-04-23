@@ -17,7 +17,7 @@ if($('#added-ajax-cue').length){//Check if the entry point already exists
 	$('#cue-row-<%= @cue_id %>').after('<div class="row cue-row" id="added-ajax-cue"></div>');
 <% end %>
 
-$('#added-ajax-cue').append('<%= j render partial: 'shows/add_cue_table', locals: {show: @show, cue: @cue, defaults: @defaults, cue_before: @cue_before, new_num: @new_num, cue_after: @cue_after} %>');
+$('#added-ajax-cue').append('<%= j render partial: 'shows/add_cue_table', locals: {show: @show, cue: @cue, defaults: @defaults, cue_before: @cue_before, new_num: @new_num} %>');
 
 $('#added-ajax-cue').animate({height: "hide"}, 0, "linear");
 
@@ -43,16 +43,3 @@ else{
 }
 
 add_remove_listener();
-
-function addCueForm(){
-	$('#added-ajax-cue').animate({
-		height: "show"
-	}, {duration: 200,
-	 	easing: "linear",
-	 	queue: false,
-	 	complete: function(){
-	 		$('#number-field').focus();
-	 	}
-	});
-}
-
