@@ -1,4 +1,12 @@
-$(function(){
+$(document).on('page:load', function(){
+	init_page();
+});
+
+$(document).ready(function(){
+	init_page();
+});
+
+function init_page(){
 	$(".sudo-button").click(function(){
 		$('.add-cue-btn').click();
 	});
@@ -23,7 +31,7 @@ $(function(){
 	}
 
 	console.log('No errors occured while loading JS');
-});
+}
 
 function add_listeners(){
 	$('.cue-row').not('#add-cue-holder').hover(
