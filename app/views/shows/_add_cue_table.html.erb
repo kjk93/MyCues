@@ -1,3 +1,5 @@
+<%# Params needed 
+	cue, defaults, new_num, show, cue_before %>
 <div id="add-cue-div">
 	<% first = true if !show.cues.any? %>
 	<%= form_for cue, remote: true do |f| %>
@@ -59,9 +61,3 @@
 		<div class="btn btn-danger" id="add-close">Cancel</div>
 	<% end %>
 </div>
-
-<!--<script type="text/javascript">
-	<%# if defaults.quick == true %>
-		$('#number-field').focus();
-	<%# end %>
-</script>-->

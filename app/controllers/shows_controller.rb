@@ -62,6 +62,7 @@ class ShowsController < ApplicationController
 		@defaults = @show.show_setting
 		quick = @defaults.quick
 		@defaults.update_attributes(quick: !quick)
+		@cue = Cue.new
 
 		respond_to do |format|
 			format.html {redirect_to edit_show_path(@show)}

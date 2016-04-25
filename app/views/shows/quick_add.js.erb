@@ -1,14 +1,23 @@
-<% if @defaults.quick %>
-	$('#quick-edit').removeClass('btn-success');
-	$('#quick-edit').addClass('btn-primary');
-	$('#quick-edit').text("Std Edit");
-	$('#number-field').focus();
-<% else %>
-	$('#quick-edit').removeClass('btn-primary');
-	$('#quick-edit').addClass('btn-success');
-	$('#quick-edit').text("Quick Edit");
-<% end %>
-
 <% def_action("edit") %>
 
-$('#show-cues-section').html('<%=j render partial: 'shows/show_cues', locals: {show: @show, cues: @show.cues, defaults: @defaults} %>');
+$('#show-cues-section').html('<%=j render partial: 'shows/show_cues', locals: {show: @show, cues: @show.cues, defaults: @defaults, cue: @cue} %>');
+
+var $edit = $('#quick-edit');
+
+<% if @defaults.quick %>
+	var $quickSection = $("#quick-add");
+	$quickSection.empty();
+	$quickSection.html('<%=j render partial: 'shows/add_cue_table', locals: {show: @show, cue_before: @show.cues.last, defaults: @defaults, cue: @cue, new_num: @show.cues.last.number + @defaults.cue_number_gap} %>');
+	check_buttons();
+	
+	$edit.removeClass('btn-success');
+	$edit.addClass('btn-primary');
+	$edit.text("Std Edit");
+	$('#number-field').focus();
+<% else %>
+	$edit.removeClass('btn-primary');
+	$edit.addClass('btn-success');
+	$edit.text("Quick Edit");
+<% end %>
+
+

@@ -23,12 +23,7 @@ function init_page(){
 		<%# end %>
 	}
 
-	if($('#add-close').length){
-		if($('#add-close').parents('#quick-add').length){
-			$('#add-close').remove();
-			$('#add-cue-inline-btn').css('width', '270%');
-		}
-	}
+	check_buttons();
 
 	console.log('No errors occured while loading JS');
 }
@@ -50,6 +45,15 @@ function add_listeners(){
 	);
 
 	add_remove_listener()
+}
+
+function check_buttons(){
+	if($('#add-close').length){
+		if($('#add-close').parents('#quick-add').length){
+			$('#add-close').remove();
+			$('#add-cue-inline-btn').css('width', '270%');
+		}
+	}
 }
 
 function add_remove_listener(){
