@@ -7,9 +7,16 @@ $(document).ready(function(){
 });
 
 function init_page(){
+	console.log('init_page called');
 	$(".sudo-button").click(function(){
 		$('.add-cue-btn').click();
 	});
+
+	//create div for click listener on inside div row
+	//same height and width 80% as parent
+	//position relative
+	//position should be same as parent
+	//higher z-index
 
 	add_listeners();
 
@@ -29,6 +36,7 @@ function init_page(){
 }
 
 function add_listeners(){
+	console.log('add_listeners called');
 	$('.cue-row').not('#add-cue-holder').hover(
 		function(){
 			$(this).css("background-color", "rgba(36, 198, 227, .25)");
@@ -37,6 +45,7 @@ function add_listeners(){
 			}, 200, "linear");
 		},
 		function(){
+			$('.add-cue-after').stop();
 			$(this).css("background-color", "");
 			$('#add-cue-after-' + $(this).data("id")).animate({
 				opacity: 0
@@ -44,10 +53,22 @@ function add_listeners(){
 		}
 	);
 
+	add_click_row();
+
+	$('.add-cue-after').click(function(){
+		console.log('insert clicked');
+		//Use row click function for when actually using effects
+	});
+
+	$('.delete-cue-button').click(function(){
+		console.log('delete clicked');
+	});
+
 	add_remove_listener()
 }
 
 function check_buttons(){
+	console.log('check_buttons called');
 	if($('#add-close').length){
 		if($('#add-close').parents('#quick-add').length){
 			$('#add-close').remove();
@@ -57,6 +78,7 @@ function check_buttons(){
 }
 
 function add_remove_listener(){
+	console.log('add_remove_listener called');
 	$('#add-close').click(
 		function(){
 			/*var prevH = $('#added-ajax-cue').height();
@@ -71,27 +93,34 @@ function add_remove_listener(){
 				$('#added-ajax-cue').remove();
 				$('#height-maintain').remove();
 			});*/
-			slide_exit($('#added-ajax-cue'));
+			slide_exit($('#added-ajax-cue'), click_row_reset);
 		}
 	);
 }
 
-function slide_exit($obj){
-	var prevH = $($obj).height();
-	$($obj).wrap('<div id="height-maintain"></div>');
-	$($obj).css({'border': 'none', 'z-index': '100'});
-	$($obj).hide("slide", {direction: "right"}, 250, function(){
+function slide_exit($obj, cbfunction){
+	console.log('slide_exit called');
+	console.log(cbfunction);
+	var prevH = $obj.height();
+	$obj.wrap('<div id="height-maintain"></div>');
+	$obj.css({'border': 'none', 'z-index': '100'});
+	$obj.hide("slide", {direction: "right"}, 250, function(){
 		$('#height-maintain').css('padding-top', prevH);
 	});
 	$('#height-maintain').animate({
 		height: 'hide'
 	}, 250, "linear", function(){
-		$($obj).remove();
+		$obj.remove();
 		$('#height-maintain').remove();
+		if(cbfunction != undefined){
+			cbfunction();
+		}
 	});
 }
 
 function change_colors(id){
+	console.log('change_colors called');
+
 	var $row = $(".cue-row[data-id='" + id + "']");
 
 	if ($row.hasClass("row-2")){
@@ -128,13 +157,79 @@ function change_colors(id){
 }
 
 function addCueForm(){
+	console.log('addCueForm called');
 	$('#added-ajax-cue').animate({
 		height: "show"
 	}, {duration: 200,
 	 	easing: "linear",
 	 	queue: false,
 	 	complete: function(){
+	 		click_row_reset();
 	 		$('#number-field').focus();
 	 	}
 	});
+}
+
+function add_click_row(){
+	console.log('add_click_row called');
+	/*var $row = $('.cue-row');
+	if($('#add-cue-holder').length){
+		len = row.length - 1;// length - 1 is accounting for the extra cue-row for the add-cue-holder
+	}
+	else{
+		len = row.length;
+	}*/
+
+	$('.cue-row').each(function(index, row){
+		if($(row).id !== 'add-cue-holder'){
+			$(row).append('<div class="cue-row-click" id=cue-row-click-' + $(this).data('id') + '></div>');
+			var rowData = $(row).data('id');
+			var $newDiv = $('#cue-row-click-' + rowData);
+			$newDiv.data('id', rowData);
+			var position = $(row).position();
+			//console.log('adding row ' + $newDiv.data('id'));
+			//formating new div
+			$newDiv.css('position', 'absolute');
+			$newDiv.css('top', position.top);
+			$newDiv.height($(row).outerHeight());
+			$newDiv.css('width', '85%');
+		}
+	});
+
+	add_click_row_listener();
+
+	//console.log('added');
+	//Not working, but saved in a comment incase current method does not work
+	/*for (var i = 0; i < len; i++){
+		var $currentRow = $('#cue-row-'+$('.cue-row')[i]);
+		console.log($('#cue-row-'+$('.cue-row')[i]).data('id'));
+		$('.cue-row').append('<div class="cue-row-click" id=' + $(this).data('id') + '></div>');
+		var $newDiv = $('.cue-row-click');
+		var $pRow = $('.cue-row')
+		$newDiv.css("position", "absolute");
+	}*/
+	//$(newDiv).css("left", )
+}
+
+function remove_click_row(){
+	console.log('remove_click_row called');
+	$('.cue-row-click').remove();
+}
+
+function add_click_row_listener(){
+	console.log('add_click_row_listener called');
+	$('.cue-row-click').click(function(){
+		var row = $(this);
+		console.log(row[0]);
+		console.log(row[0].id);
+		var $row = $('#'+row[0].id);
+		console.log($row.data('id'));
+		console.log('clicked row');
+	});	
+}
+
+function click_row_reset(){
+	console.log('click_row_reset called');
+	remove_click_row();
+	add_click_row();
 }

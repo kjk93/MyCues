@@ -66,7 +66,7 @@
 											<% end %>
 										</div>
 										<div class="cue-col-add col-xs-1 add-btn-col">
-											<%= link_to(new_cue_path(show_id: q.show, cue_after: q.number), remote: true, data: {id: q.number}, class: "btn btn-sm btn-success add-cue-after", id: "add-cue-after-#{q.id}") do %>
+											<%= link_to(new_cue_path(show_id: q.show, cue_after: q.number), remote: true, data: {id: q.number, qid: q.id}, class: "btn btn-sm btn-success add-cue-after", id: "add-cue-after-#{q.id}") do %>
 												<%= content_tag(:span, nil, class: "glyphicon glyphicon-plus submit-glyph-sm") %>
 											<% end %>
 										</div>
