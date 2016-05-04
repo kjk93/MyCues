@@ -12,23 +12,11 @@ function init_page(){
 		$('.add-cue-btn').click();
 	});
 
-	//create div for click listener on inside div row
-	//same height and width 80% as parent
-	//position relative
-	//position should be same as parent
-	//higher z-index
-
 	add_listeners();
 
 	$('#quick-edit').on('ajax:success',function(){
 		add_listeners();
 	});
-
-	if($('#number-field').length){// if a number field exists
-		<%# if defaults.quick == true %> //need to fix, causes error
-			$('#number-field').focus();
-		<%# end %>
-	}
 
 	check_buttons();
 
@@ -77,30 +65,34 @@ function check_buttons(){
 	}
 }
 
-function add_remove_listener(){
+/* effect can be:
+	0: slide_exit
+	1: cross_fade
+*/
+function add_remove_listener(effect){
 	console.log('add_remove_listener called');
 	$('#add-close').click(
 		function(){
-			/*var prevH = $('#added-ajax-cue').height();
-			$('#added-ajax-cue').wrap('<div id="height-maintain"></div>');
-			$('#added-ajax-cue').css({'border': 'none', 'z-index': '100'});
-			$('#added-ajax-cue').hide("slide", {direction: "right"}, 250, function(){
-				$('#height-maintain').css('padding-top', prevH);
-			});
-			$('#height-maintain').animate({
-				height: 'hide'
-			}, 250, "linear", function(){
-				$('#added-ajax-cue').remove();
-				$('#height-maintain').remove();
-			});*/
-			slide_exit($('#added-ajax-cue'), click_row_reset);
+			var $sec = $('#added-ajax-cue');
+			if (effect === 0){
+				slide_exit($sec, click_row_reset);
+			}
+			else{
+				remove_edit();
+
+				/*cross_fade($rowAdding, $sec, $sec.outerHeight(), function(){
+					$rowAdding.height($sec.outerHeight());
+					$rowAdding.animate({
+						height: hgt
+					}, 600, "linear");
+				});*/
+			}
 		}
 	);
 }
 
 function slide_exit($obj, cbfunction){
 	console.log('slide_exit called');
-	console.log(cbfunction);
 	var prevH = $obj.height();
 	$obj.wrap('<div id="height-maintain"></div>');
 	$obj.css({'border': 'none', 'z-index': '100'});
@@ -170,66 +162,125 @@ function addCueForm(){
 	});
 }
 
-function add_click_row(){
+function add_click_row(exception){
 	console.log('add_click_row called');
-	/*var $row = $('.cue-row');
-	if($('#add-cue-holder').length){
-		len = row.length - 1;// length - 1 is accounting for the extra cue-row for the add-cue-holder
-	}
-	else{
-		len = row.length;
-	}*/
-
 	$('.cue-row').each(function(index, row){
-		if($(row).id !== 'add-cue-holder'){
+		//console.log(exception);
+		if($(row).attr('id') !== 'add-cue-holder' && $(row).attr('id') !== 'added-ajax-cue' && $(row).attr('id') !== exception){
+			//console.log(row);
 			$(row).append('<div class="cue-row-click" id=cue-row-click-' + $(this).data('id') + '></div>');
 			var rowData = $(row).data('id');
 			var $newDiv = $('#cue-row-click-' + rowData);
 			$newDiv.data('id', rowData);
 			var position = $(row).position();
-			//console.log('adding row ' + $newDiv.data('id'));
+			//console.log('Row Height = ' + position.top + "; Data = " + $(row).data('id'));
 			//formating new div
 			$newDiv.css('position', 'absolute');
 			$newDiv.css('top', position.top);
 			$newDiv.height($(row).outerHeight());
 			$newDiv.css('width', '85%');
+			//add link for clicking
+			$newDiv.wrap('<a href="/cues/' + rowData + '/edit" data-remote="true" class="click-row-link"></a>');
+			//console.log($newDiv);
+			//console.log($newDiv.parent().parent());
 		}
 	});
 
-	add_click_row_listener();
-
-	//console.log('added');
-	//Not working, but saved in a comment incase current method does not work
-	/*for (var i = 0; i < len; i++){
-		var $currentRow = $('#cue-row-'+$('.cue-row')[i]);
-		console.log($('#cue-row-'+$('.cue-row')[i]).data('id'));
-		$('.cue-row').append('<div class="cue-row-click" id=' + $(this).data('id') + '></div>');
-		var $newDiv = $('.cue-row-click');
-		var $pRow = $('.cue-row')
-		$newDiv.css("position", "absolute");
-	}*/
-	//$(newDiv).css("left", )
+	//add_click_row_listener();
 }
 
 function remove_click_row(){
 	console.log('remove_click_row called');
 	$('.cue-row-click').remove();
+	$('.click-row-link').remove();
 }
 
 function add_click_row_listener(){
 	console.log('add_click_row_listener called');
-	$('.cue-row-click').click(function(){
+	/*$('.cue-row-click').click(function(){
 		var row = $(this);
 		console.log(row[0]);
 		console.log(row[0].id);
 		var $row = $('#'+row[0].id);
 		console.log($row.data('id'));
 		console.log('clicked row');
-	});	
+	});	*/
 }
 
-function click_row_reset(){
+function click_row_reset(addException = ''){
 	console.log('click_row_reset called');
 	remove_click_row();
-	add_click_row();
+	add_click_row(addException);
+}
+
+function insert_added_ajax(top){
+	var $section = $('#added-ajax-cue');
+	$section.css("position", "absolute");
+	$section.css("top", top);
+	$section.css("opacity", 0);
+}
+
+function cross_fade($in, $out, height, cbAdd){
+	console.log("cross_fade called");
+	$out.animate({
+		height: height //for height change of fading element
+	}, 600, "linear", function(){
+			$out.parent().append($in);
+			insert_added_ajax($out.position().top);
+			$out.fadeOut({
+				duration: 500,
+				queue: false,
+				complete: function(){
+					$in.css('position', 'relative');
+					$in.css('top', 'auto');
+					if(cbAdd != undefined){
+						cbAdd();
+					}
+				}
+			});
+			$in.css('display', "");
+			$in.animate({
+				opacity: 1
+			}, {
+				duration: 500, 
+				queue: false
+			});
+	});
+}
+
+function remove_edit(){
+	console.log('remove_edit called');
+	var $cues = $('.cue-row');
+	var $rowAdding = $('#cue-row-' + $('#add-close').parents('.cue-row').data('id'));
+	var hgt = $cues.not('#top-add, #added-ajax-cue, #' + $rowAdding.attr('id')).first().outerHeight();//excluding elements that are not normal cue-rows
+	var $pRow = $('#add-close').parents('.cue-row');
+	var beforeIndex = $cues.index($pRow) - 2;  //2 because of hidden row
+	if (beforeIndex >= 0){
+		var $rowBefore = $('#'+$cues[beforeIndex].id);
+	}
+	else{
+		var $rowBefore = $('#'+$cues[beforeIndex + 1].id);	
+	}
+	$rowBefore.after($rowAdding);
+	$rowAdding.css({'top': $pRow.position().top, 'position': 'absolute', 'width':'100%'});
+	$rowAdding.fadeIn(500);
+	$pRow.fadeOut(500, function(){
+		var ht = $rowAdding.outerHeight();
+		$rowAdding.attr('style', '');//{'position':'relative', 'display':'', 'width':'', 'top':''});
+		$rowAdding.css('height', ht);
+		//console.log($rowAdding.parent());
+		$rowAdding.animate({
+			height: hgt
+		}, 600, "linear", function(){
+			var cl = $rowAdding.attr('class');
+			$rowAdding.removeClass();
+			$rowAdding.addClass(cl);
+			$('#added-ajax-cue').remove();
+			click_row_reset()
+		});
+	});
+}
+
+function insert_edit(id){
+
 }

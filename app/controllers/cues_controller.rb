@@ -64,7 +64,11 @@ class CuesController < ApplicationController
 		@cue = Cue.find(params[:id])
 		@show = Show.find(@cue.show)
 		@defaults = @show.show_setting
-		@sorted = @show.cues.sort_by{|e| e[:number]}
+		
+		respond_to do |format|
+			format.html {}
+			format.js {}
+		end
 	end
 
 	def update

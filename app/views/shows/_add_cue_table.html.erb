@@ -1,5 +1,9 @@
 <%# Params needed 
-	cue, defaults, new_num, show, cue_before %>
+	cue, defaults, new_num, show, cue_before 
+	
+	Notes: When editing cue, can save the space on the cue_before variable because it is the same as cue when this is the case.  Make more efficent later
+	%>
+
 <div id="add-cue-div">
 	<% first = true if !show.cues.any? %>
 	<%= form_for cue, remote: true do |f| %>
@@ -27,7 +31,11 @@
 			<%= f.text_field :follow_time, class: "form-control" %>
 			<div id="radio-holder-add">
 				<%= f.label :follow do %>
-					<%= f.radio_button :follow, 0, checked: true %>None
+					<% if cue.follow.nil? %>
+						<%= f.radio_button :follow, 0, checked: true %>None
+					<% else %>
+						<%= f.radio_button :follow, 0 %>None
+					<% end %>
 				<% end %>
 				<%= f.label :follow do %>
 					<%= f.radio_button :follow, 1 %>Follow
