@@ -1,0 +1,11 @@
+var $cueRow = $('#cue-row-<%= @cue.id %>');
+
+var style = $cueRow.attr('style');
+
+$cueRow.replaceWith('<%= j render partial: 'shows/ajax_create_cue', locals: {q: @cue, defaults: @defaults, count: 1} %>');
+
+$cueRow.attr('style', style);
+
+remove_edit();
+
+add_listeners();

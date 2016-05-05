@@ -2,31 +2,32 @@ class CuesController < ApplicationController
 	def new
 		@show = Show.find(params[:show_id])
 		cues = @show.cues
-		number_after = params[:cue_after]
-		if number_after.to_i == -200 #flag for adding to end
-			@cue_index = cues.index(cues.last)
-		else
-			idx = cues.index(cues.find_by(number: number_after))
-			@cue_index = idx-1
-		end
-		@cue_before = Cue.find(cues[@cue_index].id)
-		@cue_id = @cue_before.id
-		@defaults = @show.show_setting
-
-		#Pass New Cue Number
-		if number_after.to_i == -200
-			@new_num = @cue_before.number + @defaults.cue_number_gap
-		else
-			@cue_after = Cue.find(cues[idx].id)#finds cue after number
-			if idx == 0
-				@new_num = @cue_after.number
+		if cues.any?
+			number_after = params[:cue_after]
+			if number_after.to_i == -200 #flag for adding to end
+				@cue_index = cues.index(cues.last)
 			else
-				#Avgerages the cue before and the cue after
-				@new_num = (@cue_after.number + @cue_before.number)/2
+				idx = cues.index(cues.find_by(number: number_after))
+				@cue_index = idx-1
+			end
+			@cue_before = Cue.find(cues[@cue_index].id)
+			@cue_id = @cue_before.id
+			@defaults = @show.show_setting
+
+			#Pass New Cue Number
+			if number_after.to_i == -200
+				@new_num = @cue_before.number + @defaults.cue_number_gap
+			else
+				@cue_after = Cue.find(cues[idx].id)#finds cue after number
+				if idx == 0
+					@new_num = @cue_after.number
+				else
+					#Avgerages the cue before and the cue after
+					@new_num = (@cue_after.number + @cue_before.number)/2
+				end
 			end
 		end
-
-		@sorted = @show.cues.sort_by{|e| e[:number]}
+		#@sorted = @show.cues.sort_by{|e| e[:number]}
 		@cue = Cue.new
 
 		respond_to do |format|
@@ -64,7 +65,7 @@ class CuesController < ApplicationController
 		@cue = Cue.find(params[:id])
 		@show = Show.find(@cue.show)
 		@defaults = @show.show_setting
-		
+
 		respond_to do |format|
 			format.html {}
 			format.js {}
@@ -72,11 +73,19 @@ class CuesController < ApplicationController
 	end
 
 	def update
-		@show = Show.find(params[:show_id])
 		@cue = Cue.find(params[:id])
+
+		@show = @cue.show
+		@defaults = @show.show_setting
 		if @cue.update_attributes(cue_params)
 			flash[:success] = "Cue #{decimal_format(@cue.number)} Updated"
-			redirect_to edit_show_path(@show)
+			if @cue.follow_time.nil?
+				@cue.update_attributes(follow: 0)
+			end
+			respond_to do |format|
+				format.html {redirect_to edit_show_path(@show)}
+				format.js {}
+			end
 		else
 			flash[:danger] = "Could not update cue"
 			render 'edit'
@@ -104,7 +113,7 @@ class CuesController < ApplicationController
 
 	private
 		def cue_params
-			params.require(:cue).permit(:auto_follow, :number, :time, :follow, :follow_time, :purpose, :page)
+			params.require(:cue).permit(:auto_follow, :number, :time, :follow, :follow_time, :purpose, :called, :page)
 		end
 
 		def decimal_format(number)

@@ -1,3 +1,9 @@
+<%# Params needed 
+	q, defaults, count
+	
+	Notes:
+	%>
+
 <% if count%2 == 1%>
 	<div class="row cue-row row-1" id="cue-row-<%= q.id %>" data-link="<%= edit_cue_path(q) %>" data-id="<%= q.id %>">
 <% else %>
