@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
   resources :shows
   get 'show/:id/settings/quick_add_enabled' => 'shows#quick_add', as: 'quick_add'
+  get 'show/:id/print' => 'shows#print', as: 'print_show'
   resources :cues
   #resources :user_settings, only:[:edit, :update, :destroy]
 

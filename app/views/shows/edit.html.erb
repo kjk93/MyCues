@@ -15,7 +15,8 @@
 		<% else %>
 			<div class="col-xs-1 col-xs-offset-2">Error loading Quick Edit</div>
 		<% end %>
-		<%= link_to "Delete show", show_path, method: :delete, data:{confirm: "Delete Show #{@show.title}"}, class: "col-xs-2 col-xs-offset-6 btn btn-primary btn-danger", id: "delete-show" %>
+		<%= link_to "Print", print_show_path(@show), class: "col-xs-2 col-xs-offset-2 btn btn-primary btn-default", id: "print-show" %>
+		<%= link_to "Delete show", show_path, method: :delete, data:{confirm: "Delete Show #{@show.title}"}, class: "col-xs-2 col-xs-offset-3 btn btn-primary btn-danger", id: "delete-show" %>
 	</div>
 </div>
 

@@ -71,6 +71,11 @@ class ShowsController < ApplicationController
 		end
 	end
 
+	def print
+		@show = Show.find(params[:id])
+		@cues = @show.cues
+	end
+
 	private
 		def show_params
 			params.require(:show).permit(:title)
