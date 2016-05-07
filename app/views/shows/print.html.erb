@@ -14,21 +14,19 @@
 					<div class="table-head cue-col-num col-xs-1">#</div>
 					<div class="table-head cue-col-time col-xs-1">Time</div>
 					<div class="table-head cue-col-fh col-xs-2">Follow/Hang</div>
-					<div class="table-head cue-col-pur col-xs-2">Purpose</div>
-					<div class="table-head cue-col-call col-xs-2">Called</div>
+					<div class="table-head cue-col-pur col-xs-3">Purpose</div>
+					<div class="table-head cue-col-call col-xs-3">Called</div>
 					<div class="table-head cue-col-pg col-xs-1">Page #</div>
-					<div class="table-head cue-col-del col-xs-1">Delete</div>
-					<div class="table-head cue-col-add col-xs-1">Insert</div>
 				</div>
 				<div id="table-body">
 					<div id="top-add"></div>
-					<% if show.cues.any? %>
+					<% if @cues.any? %>
 						<% n = 1 %>
-						<% cues.each do |q| %>
+						<% @cues.each do |q| %>
 							<% if n%2 == 1 %>
-								<div class="row cue-row row-1" id="cue-row-<%= q.id %>" data-link="<%= edit_cue_path(q) %>" data-id="<%= q.id %>">
+								<div class="row cue-row-print row-1" id="cue-row-<%= q.id %>" data-link="<%= edit_cue_path(q) %>" data-id="<%= q.id %>">
 							<% else %>
-								<div class="row cue-row row-2" id="cue-row-<%= q.id %>" data-link="<%= edit_cue_path(q) %>" data-id="<%= q.id %>">
+								<div class="row cue-row-print row-2" id="cue-row-<%= q.id %>" data-link="<%= edit_cue_path(q) %>" data-id="<%= q.id %>">
 							<% end %>
 									<div class="cue-col-af col-xs-1">
 										<% if q.auto_follow == true %>
@@ -47,28 +45,12 @@
 										Error
 									<% end %>
 									</div>
-									<div class="cue-col-pur col-xs-2"><%= q.purpose %></div>
-									<div class="cue-col-call col-xs-2"><%= q.called %></div>
+									<div class="cue-col-pur col-xs-3"><%= q.purpose %></div>
+									<div class="cue-col-call col-xs-3"><%= q.called %></div>
 									<div class="cue-col-pg col-xs-1"><%= q.page %></div>
-									<div class="cue-col-del col-xs-1" id="delete-cue-<%= q.id %>">
-										<% if defaults.quick == false %>
-											<%= link_to cue_path(q.id), method: :delete, remote: true, data: {confirm: "Delete Cue #{decimal_format(q.number)}?"}, class: "cue-del-a" do %>
-												<span class="glyphicon glyphicon-remove delete-cue-button remove-glyph"></span>
-											<% end %>
-										<% else %>
-											<%= link_to cue_path(q.id), method: :delete, remote: true, class: "cue-del-a" do %>
-												<span class="glyphicon glyphicon-remove delete-cue-button remove-glyph"></span>
-											<% end %>
-										<% end %>
-									</div>
-									<div class="cue-col-add col-xs-1 add-btn-col">
-										<%= link_to(new_cue_path(show_id: q.show, cue_after: q.number), remote: true, data: {id: q.number, qid: q.id}, class: "btn btn-sm btn-success add-cue-after", id: "add-cue-after-#{q.id}") do %>
-											<%= content_tag(:span, nil, class: "glyphicon glyphicon-plus submit-glyph-sm") %>
-										<% end %>
-									</div>
 								</div>
-						<% n = n + 1 %>
-					<% end %>
+							<% n = n + 1 %>
+						<% end %>
 						<%# render 'add_cue_table', locals: {show: show, cue: Cue.new, defaults:defaults, sorted: @sorted} %>
 					<% else %>
 						<div id="empty-text">This show has no cues.  Start creating cues now.</div>
@@ -78,3 +60,9 @@
 		</span>
 	</div>
 </div>
+
+<script type="text/javascript">
+	remove_header();
+	window.print();
+	window.close();
+</script>
