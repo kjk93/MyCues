@@ -25,6 +25,10 @@ function init_page(){
 
 function add_listeners(remove_effect = 0){
 	console.log('add_listeners called');
+	if (remove_effect === undefined){
+		remove_effect = 0;
+	}
+	console.log('REMOVE EFFECT = ' + remove_effect);
 	$('.cue-row').not('#add-cue-holder').hover(
 		function(){
 			$(this).css("background-color", "rgba(36, 198, 227, .25)");
@@ -208,8 +212,12 @@ function add_click_row_listener(){
 	});	*/
 }
 
-function click_row_reset(addException = ''){
+function click_row_reset(addException){
 	console.log('click_row_reset called');
+	if (addException === undefined){
+		addException = '';
+	}
+	console.log('ADD EXCEPTION = ' + addException);
 	remove_click_row();
 	add_click_row(addException);
 }
