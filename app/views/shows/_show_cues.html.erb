@@ -73,24 +73,15 @@
 									</div>
 							<% n = n + 1 %>
 						<% end %>
-						<%# render 'add_cue_table', locals: {show: show, cue: Cue.new, defaults:defaults, sorted: @sorted} %>
-					<% else %>
-						<div id="empty-text">This show has no cues.  Start creating cues now.</div>
 					<% end %>
 				</div>
 			</div>
 		</span>
 	</div>
-<!-- 	<div id="delete-cue-part">
-		<%# render partial: "delete_cues", locals: {cues: @cues, defaults: @defaults} %>
-	</div>
-	<div id="add-cue-buttons">
-		<%# render partial: "idv_add_cue", locals: {cues: @cues} %>
-	</div> -->
 </div>
 <% if defaults.quick == true && show.cues.any?%>
 	<div class="row text-center col-xs-10 col-xs-offset-1" id="quick-add">
-		<%= render partial: 'shows/add_cue_table', locals: {show: show, cue: cue, defaults: defaults, cue_before: cues.last, new_num: cues.last.number + defaults.cue_number_gap} %>
+		<%= render partial: 'shows/add_cue_table', locals: {show: show, cue: cue, defaults: defaults, cue_before: cues.last, new_num: cues.last.number + defaults.cue_number_gap, cue_after: nil} %>
 	</div>
 <% else %>
 	<div class="container-fluid">

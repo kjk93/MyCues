@@ -26,8 +26,10 @@ class CuesController < ApplicationController
 					@new_num = (@cue_after.number + @cue_before.number)/2
 				end
 			end
+		else
+			@defaults = @show.show_setting
 		end
-		#@sorted = @show.cues.sort_by{|e| e[:number]}
+		
 		@cue = Cue.new
 
 		respond_to do |format|
@@ -38,13 +40,23 @@ class CuesController < ApplicationController
 
 	def create
 		@show = Show.find(params[:show])
-		last_cue = @show.cues.last
+		if @show.cues.any?
+			last_cue = @show.cues.last
+			@cue_before = Cue.find(params[:cue_before])
+			if !params[:cue_after].nil?
+				@cue_after = Cue.find(params[:cue_after])
+			end
+		else
+			#make up values to fail if test later
+			last_cue = -200
+			@cue_before = -201
+		end
 		@cue = @show.cues.build(cue_params)
 		@defaults = @show.show_setting
-		@cue_before = Cue.find(params[:cue_before])
+		
 		if last_cue == @cue_before
 			@last = true
-		else
+		elsif
 			@last = false
 		end
 		@new_cue = Cue.new

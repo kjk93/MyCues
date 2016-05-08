@@ -23,7 +23,7 @@ function init_page(){
 	console.log('No errors occured while loading JS');
 }
 
-function add_listeners(){
+function add_listeners(remove_effect = 0){
 	console.log('add_listeners called');
 	$('.cue-row').not('#add-cue-holder').hover(
 		function(){
@@ -75,6 +75,7 @@ function add_remove_listener(effect){
 		function(){
 			var $sec = $('#added-ajax-cue');
 			if (effect === 0){
+				console.log('added to ajax');
 				slide_exit($sec, click_row_reset);
 			}
 			else{
@@ -224,11 +225,11 @@ function cross_fade($in, $out, height, cbAdd){
 	console.log("cross_fade called");
 	$out.animate({
 		height: height //for height change of fading element
-	}, 600, "linear", function(){
+	}, 300, "linear", function(){
 			$out.parent().append($in);
 			insert_added_ajax($out.position().top);
 			$out.fadeOut({
-				duration: 500,
+				duration: 150,
 				queue: false,
 				complete: function(){
 					$in.css('position', 'relative');
@@ -242,7 +243,7 @@ function cross_fade($in, $out, height, cbAdd){
 			$in.animate({
 				opacity: 1
 			}, {
-				duration: 500, 
+				duration: 150, 
 				queue: false
 			});
 	});
@@ -263,15 +264,15 @@ function remove_edit(){
 	}
 	$rowBefore.after($rowAdding);
 	$rowAdding.css({'top': $pRow.position().top, 'position': 'absolute', 'width':'100%'});
-	$rowAdding.fadeIn(500);
-	$pRow.fadeOut(500, function(){
+	$rowAdding.fadeIn(150);
+	$pRow.fadeOut(150, function(){
 		var ht = $rowAdding.outerHeight();
 		$rowAdding.attr('style', '');//{'position':'relative', 'display':'', 'width':'', 'top':''});
 		$rowAdding.css('height', ht);
 		//console.log($rowAdding.parent());
 		$rowAdding.animate({
 			height: hgt
-		}, 600, "linear", function(){
+		}, 300, "linear", function(){
 			var cl = $rowAdding.attr('class');
 			$rowAdding.removeClass();
 			$rowAdding.addClass(cl);
@@ -279,10 +280,4 @@ function remove_edit(){
 			click_row_reset()
 		});
 	});
-}
-
-
-
-function insert_edit(id){
-
 }

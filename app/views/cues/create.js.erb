@@ -1,19 +1,30 @@
 <% if @show.cues.count == 1 %>
-	$('#empty-text').remove();
+	<% first = true %>
 <% end %>
 
-<% if @last %>
+<% if @last && @defaults.quick %>
 	$('#cue-row-<%= @cue_before.id %>').after('<%= j render partial: 'shows/ajax_create_cue', locals: {q: @cue, count: @show.cues.count, defaults: @defaults} %>');
 <% else %>
 	//$('#table-body').append('<%= j render partial: 'shows/ajax_create_cue', locals: {q: @cue, count: @show.cues.count, defaults: @defaults} %>');
-	$('#added-ajax-cue').after('<%= j render partial: 'shows/ajax_create_cue', locals: {q: @cue, count: @show.cues.count, defaults: @defaults} %>');
+	<% if @defaults.quick %>
+		$('#added-ajax-cue').before('<%= j render partial: 'shows/ajax_create_cue', locals: {q: @cue, count: @show.cues.count, defaults: @defaults} %>');
+	<% else %>
+		$('#added-ajax-cue').after('<%= j render partial: 'shows/ajax_create_cue', locals: {q: @cue, count: @show.cues.count, defaults: @defaults} %>');
 
-	$('#added-ajax-cue').remove();
+		$('#added-ajax-cue').remove();
+	<% end %>
 <% end %>
 
-change_colors(<%= @cue_before.id %>);
-<% if @defaults.quick == true %>
-	$('#add-cue-div').replaceWith('<%= j render partial: 'shows/add_cue_table', locals: {cue: @new_cue, defaults: @defaults, new_num: @show.cues.last.number + @defaults.cue_number_gap, show: @show, cue_before: @cue} %>');
+<% if !first %>
+	change_colors(<%= @cue_before.id %>);
+<% end %>
+<% if @defaults.quick %>
+	<% if @last %>
+		<% new_num = @show.cues.last.number + @defaults.cue_number_gap %>
+	<% else %>
+		<% new_num = (@cue.number + @cue_after.number)/2 #Find number in the middle %>
+	<% end %>
+	$('#add-cue-div').replaceWith('<%= j render partial: 'shows/add_cue_table', locals: {cue: @new_cue, defaults: @defaults, new_num: new_num, show: @show, cue_before: @cue, cue_after: @cue_after} %>');
 	check_buttons();
 	/*$('#number-cue').find('input').val('<%= decimal_format(@cue.number + @defaults.cue_number_gap) %>');
 
@@ -24,4 +35,4 @@ change_colors(<%= @cue_before.id %>);
 	$('#number-field').focus();
 <% end %>
 
-add_listeners();
+add_listeners(0);

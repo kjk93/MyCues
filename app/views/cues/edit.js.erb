@@ -14,7 +14,7 @@ var $add = $('#added-ajax-cue');
 var $holder = $('.holder');
 var holdWidth = $holder.width();
 
-$add.append('<%= j render partial: 'shows/add_cue_table', locals: {show: @show, cue: @cue, defaults: @defaults, cue_before: @cue, new_num: @cue.number} %>');
+$add.append('<%= j render partial: 'shows/add_cue_table', locals: {show: @show, cue: @cue, defaults: @defaults, cue_before: @cue, new_num: @cue.number, cue_after: nil} %>');
 
 var addHeight = $add.outerHeight();
 

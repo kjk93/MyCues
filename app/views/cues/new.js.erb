@@ -6,7 +6,9 @@ if($('#added-ajax-cue').length){//Check if the entry point already exists
 	$('#added-ajax-cue').removeAttr('id');
 }
 
-<% if @cue_index < 0 #Inserting at the first position%>
+<% if @cue_index.nil? %>
+	$('#top-add').after('<div class="row cue-row" id="added-ajax-cue"></div>');
+<% elsif @cue_index < 0 #Inserting at the first position%>
 	<% if @new_num - @defaults.cue_number_gap < 0.01%>
 		<% @new_num = 0.1 %>
 	<% else %>
@@ -17,7 +19,7 @@ if($('#added-ajax-cue').length){//Check if the entry point already exists
 	$('#cue-row-<%= @cue_id %>').after('<div class="row cue-row" id="added-ajax-cue"></div>');
 <% end %>
 
-$('#added-ajax-cue').append('<%= j render partial: 'shows/add_cue_table', locals: {show: @show, cue: @cue, defaults: @defaults, cue_before: @cue_before, new_num: @new_num} %>');
+$('#added-ajax-cue').append('<%= j render partial: 'shows/add_cue_table', locals: {show: @show, cue: @cue, defaults: @defaults, cue_before: @cue_before, new_num: @new_num, cue_after: @cue_after} %>');
 
 $('#added-ajax-cue').animate({height: "hide"}, 0, "linear");
 

@@ -7,6 +7,6 @@ $('<%= "#cue-row-#{@cue.id}" %>').remove();
 change_colors(<%= @cue_before.id %>);
 
 <% if @defaults.quick %>
-	$('#add-cue-div').replaceWith('<%= j render partial: 'shows/add_cue_table', locals: {cue: @new_cue, defaults: @defaults, new_num: @show.cues.last.number, show: @show, cue_before: @cue_before} %>');
+	$('#add-cue-div').replaceWith('<%= j render partial: 'shows/add_cue_table', locals: {cue: @new_cue, defaults: @defaults, new_num: @show.cues.last.number, show: @show, cue_before: @cue_before, cue_after: nil} %>');
 	check_buttons();
 <% end %>

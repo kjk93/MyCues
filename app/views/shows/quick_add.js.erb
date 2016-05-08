@@ -7,7 +7,13 @@ var $edit = $('#quick-edit');
 <% if @defaults.quick %>
 	var $quickSection = $("#quick-add");
 	$quickSection.empty();
-	$quickSection.html('<%=j render partial: 'shows/add_cue_table', locals: {show: @show, cue_before: @show.cues.last, defaults: @defaults, cue: @cue, new_num: @show.cues.last.number + @defaults.cue_number_gap} %>');
+	<% if @show.cues.any? %>
+		<% new_num = @show.cues.last.number + @defaults.cue_number_gap %>
+	<% else %>
+		<% new_num = @defaults.start_cue %>
+	<% end %>
+	$quickSection.html('<%=j render partial: 'shows/add_cue_table', locals: {show: @show, cue_before: @show.cues.last, defaults: @defaults, cue: @cue, new_num: new_num, cue_after: nil} %>');
+
 	check_buttons();
 	
 	$edit.removeClass('btn-success');
