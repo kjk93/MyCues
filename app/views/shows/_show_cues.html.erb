@@ -79,10 +79,16 @@
 		</span>
 	</div>
 </div>
-<% if defaults.quick == true && show.cues.any?%>
-	<div class="row text-center col-xs-10 col-xs-offset-1" id="quick-add">
-		<%= render partial: 'shows/add_cue_table', locals: {show: show, cue: cue, defaults: defaults, cue_before: cues.last, new_num: cues.last.number + defaults.cue_number_gap, cue_after: nil} %>
-	</div>
+<% if defaults.quick == true %>
+	<% if show.cues.any? %>
+		<div class="row text-center col-xs-10 col-xs-offset-1" id="quick-add">
+			<%= render partial: 'shows/add_cue_table', locals: {show: show, cue: cue, defaults: defaults, cue_before: cues.last, new_num: cues.last.number + defaults.cue_number_gap, cue_after: nil} %>
+		</div>
+	<% else %>
+		<div class="row text-center col-xs-10 col-xs-offset-1" id="quick-add">
+			<%= render partial: 'shows/add_cue_table', locals: {show: show, cue: cue, defaults: defaults, cue_before: nil, new_num: defaults.start_cue, cue_after: nil} %>
+		</div>
+	<% end %>
 <% else %>
 	<div class="container-fluid">
 		<% if cues.any? %>

@@ -2,7 +2,9 @@
 	<% first = true %>
 <% end %>
 
-<% if @last && @defaults.quick %>
+<% if @last && first %>
+	$('#top-add').after('<%= j render partial: 'shows/ajax_create_cue', locals: {q: @cue, count: @show.cues.count, defaults: @defaults} %>');
+<% elsif @last && @defaults.quick %>
 	$('#cue-row-<%= @cue_before.id %>').after('<%= j render partial: 'shows/ajax_create_cue', locals: {q: @cue, count: @show.cues.count, defaults: @defaults} %>');
 <% else %>
 	//$('#table-body').append('<%= j render partial: 'shows/ajax_create_cue', locals: {q: @cue, count: @show.cues.count, defaults: @defaults} %>');

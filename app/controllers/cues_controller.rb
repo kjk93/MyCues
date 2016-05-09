@@ -49,7 +49,7 @@ class CuesController < ApplicationController
 		else
 			#make up values to fail if test later
 			last_cue = -200
-			@cue_before = -201
+			@cue_before = -200
 		end
 		@cue = @show.cues.build(cue_params)
 		@defaults = @show.show_setting
