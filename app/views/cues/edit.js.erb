@@ -35,13 +35,13 @@ cross_fade($add, $row, addHeight, function(){
 
 if(dup_add == true){
 	$('.to-remove').animate({
-		height: "hide"
+		height: $row.outerHeight()
 	}, {duration: 200,
 	 	easing: "linear",
 	 	queue: false,
 	 	complete: function(){
-	 		$(this).empty();
-	 		$(this).remove();
+	 		//$(this).empty();
+	 		//$(this).remove();
 	 		$('#number-field').focus();
 	 	}
 	});

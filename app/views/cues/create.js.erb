@@ -4,6 +4,8 @@
 
 <% if @last && first %>
 	$('#top-add').after('<%= j render partial: 'shows/ajax_create_cue', locals: {q: @cue, count: @show.cues.count, defaults: @defaults} %>');
+
+	$('#added-ajax-cue').remove();
 <% elsif @last && @defaults.quick %>
 	$('#cue-row-<%= @cue_before.id %>').after('<%= j render partial: 'shows/ajax_create_cue', locals: {q: @cue, count: @show.cues.count, defaults: @defaults} %>');
 <% else %>
