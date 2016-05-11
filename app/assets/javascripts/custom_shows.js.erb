@@ -75,6 +75,7 @@ function check_buttons(){
 */
 function add_remove_listener(effect){
 	console.log('add_remove_listener called');
+	console.log($('#add-close'));
 	$('#add-close').click(
 		function(){
 			var $sec = $('#added-ajax-cue');
@@ -252,7 +253,7 @@ function cross_fade($in, $out, height, cbAdd){
 				opacity: 1
 			}, {
 				duration: 150, 
-				queue: false
+				queue: false,
 			});
 	});
 }

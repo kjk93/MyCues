@@ -7,6 +7,7 @@ if($('#added-ajax-cue').length){//Check if the entry point already exists
 }
 
 var $row = $('#cue-row-<%= @cue.id %>');
+var rowHeight = $row.outerHeight();
 
 $row.after('<div class="holder"><div class="row cue-row" id="added-ajax-cue"></div></div>');
 
@@ -34,8 +35,8 @@ cross_fade($add, $row, addHeight, function(){
 });
 
 if(dup_add == true){
-	$('.to-remove').animate({
-		height: $row.outerHeight()
+	/*$('.to-remove').animate({
+		height: "hide"
 	}, {duration: 200,
 	 	easing: "linear",
 	 	queue: false,
@@ -44,6 +45,30 @@ if(dup_add == true){
 	 		//$(this).remove();
 	 		$('#number-field').focus();
 	 	}
+	});*/
+
+	var $undo = $('#cue-row-' + $('.to-remove').data('id'));
+	var $remove = $('.to-remove');
+
+	$undo.height = $remove.outerHeight();
+
+	$undo.fadeIn({
+		duration: 150,
+		complete: function(){
+			$remove.fadeOut({
+				duration: 150,
+				complete: function(){
+					$undo.animate({
+						height: rowHeight
+					}, 150, "linear", function(){
+						$remove.empty();
+						$remove.remove();
+						click_row_reset(1);
+					});
+					
+				}
+			});
+		}
 	});
 }
 
