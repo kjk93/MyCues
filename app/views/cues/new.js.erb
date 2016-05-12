@@ -33,6 +33,34 @@ if(dup_add == true){
 	 	easing: "linear",
 	 	queue: false,
 	 	complete: function(){
+	 		if ($(this).hasClass('.edit-add')){
+	 			console.log('hasClass');
+	 			var $undo = $('#cue-row-' + $(this).data('id'));
+
+	 			$undo.height = $(this).outerHeight();
+
+	 			var $remove = $(this);
+
+	 			$undo.fadeIn({
+					duration: 150,
+					complete: function(){
+						$remove.fadeOut({
+							duration: 150,
+							complete: function(){
+								$undo.animate({
+									height: rowHeight
+								}, 150, "linear", function(){
+									$remove.empty();
+									$remove.remove();
+									click_row_reset(1);
+									add_listeners(1);
+								});
+								
+							}
+						});
+					}
+				});
+	 		}
 	 		$(this).empty();
 	 		$(this).remove();
 	 		$('#number-field').focus();
